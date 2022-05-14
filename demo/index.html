@@ -2,28 +2,23 @@
 <html lang="en-GB">
 <head>
   <meta charset="utf-8">
-  <style>
-    body {
-      background: #fafafa;
-    }
-  </style>
 </head>
+
 <body>
-  <div id="demo"></div>
+
+  <div id="demo">
+    <vellum-random-table title="pack">
+      <vellum-item>purse</vellum-item>
+      <vellum-item weight="2">backpack</vellum-item>
+      <vellum-item>bag</vellum-item>
+      <vellum-item>pack</vellum-item>
+      <vellum-item>rucksack</vellum-item>
+    </vellum-random-table>
+  </div>
 
   <script type="module">
-    import { html, render } from 'lit';
     import '../dist/src/vellum-random-table.js';
-
-    const title = 'Hello owc World!';
-    render(
-      html`
-        <vellum-random-table .title=${title}>
-          some light-dom
-        </vellum-random-table>
-      `,
-      document.querySelector('#demo')
-    );
   </script>
+
 </body>
 </html>

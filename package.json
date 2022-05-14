@@ -1,6 +1,6 @@
 {
   "name": "vellum-random-table",
-  "description": "Webcomponent vellum-random-table following open-wc recommendations",
+  "description": "Custom element for displaying and rolling random tables",
   "license": "MIT",
   "author": "vellum-random-table",
   "version": "0.0.0",
