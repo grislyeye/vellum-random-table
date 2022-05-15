@@ -18,7 +18,7 @@ npm i vellum-random-table
 <vellum-random-table></vellum-random-table>
 ```
 
-The `<vellum-random-table>` use the following syntax:
+The `<vellum-random-table>` element uses the following syntax:
 
 ```html
 <vellum-random-table title="pack">
@@ -30,7 +30,7 @@ The `<vellum-random-table>` use the following syntax:
 </vellum-random-table>
 ```
 
-This generates the following:
+This generates the following HTML:
 
 <table>
   <thead>
@@ -62,6 +62,23 @@ This generates the following:
     </tr>
   </tbody>
 </table>
+<button type="button" disabled>Roll</button>
+
+The `<vellum-random-table>` element should contain a number of `<vellum-item>` elements, each representing a row of the table.
+
+The `<vellum-random-table>` element has the following attributes:
+
+| Attribute | Description                                                  | Default                   |
+| --------- | ------------------------------------------------------------ | ------------------------- |
+| `die`     | The type of dice to be rolled for the table. This should use the standard TTRPG notation (e.g. d6, d20, etc.). | Automatically calculated. |
+| `title`   | The category of items the table rolls for.                   | Empty string.             |
+
+The `<vellum-item>` element should contain the text of the result, if this item is selected. It has the following attributes:
+
+| Attribute | Description                                                  | Default                   |
+| --------- | ------------------------------------------------------------ | ------------------------- |
+| `weight`  | Determines how likely this item is to be selected. Weights greater than 1 increase the likelihood. A `2` makes it twice as likely, a `3` three times, etc.. | `1`                       |
+| `result`  | The dice result range for this item. This could be a number, like `5`, or a range, such as `2-3`. | Automatically calculated. |
 
 ## Linting and formatting
 
