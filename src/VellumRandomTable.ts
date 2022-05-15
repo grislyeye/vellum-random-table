@@ -1,7 +1,6 @@
 import { html, css, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { Item } from './Item.js';
-import { ItemEvent } from './ItemEvent.js';
 
 export class VellumRandomTable extends LitElement {
   static styles = css`
@@ -34,7 +33,7 @@ export class VellumRandomTable extends LitElement {
   }
 
   private tableItemRegistered(event: Event) {
-    const { item } = (<CustomEvent<ItemEvent>>event).detail;
+    const item = (<CustomEvent<Item>>event).detail;
     this.items.push(item);
     this.updateItems();
   }

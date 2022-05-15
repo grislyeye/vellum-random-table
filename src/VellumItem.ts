@@ -1,7 +1,6 @@
 import { html, css, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { Item } from './Item.js';
-import { ItemEvent } from './ItemEvent.js';
 
 export class VellumItem extends LitElement implements Item {
   static styles = css`
@@ -26,8 +25,8 @@ export class VellumItem extends LitElement implements Item {
   connectedCallback() {
     super.connectedCallback();
 
-    const event = new CustomEvent<ItemEvent>('vellum-item-attached', {
-      detail: new ItemEvent(this),
+    const event = new CustomEvent<Item>('vellum-item-attached', {
+      detail: this,
       bubbles: true,
       composed: true,
     });

@@ -3,7 +3,7 @@
   "description": "Custom element for displaying and rolling random tables",
   "license": "MIT",
   "author": "vellum-random-table",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "main": "dist/src/index.js",
   "module": "dist/src/index.js",
   "exports": {
