@@ -16,7 +16,7 @@ export class VellumItem extends LitElement implements Item {
 
   @property({ type: Number }) weight: number = 1;
 
-  @property({ type: String }) result: string | null = null;
+  @property({ attribute: false }) result: string | null = null;
 
   get value(): null | string {
     return this.textContent;

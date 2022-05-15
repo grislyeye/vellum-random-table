@@ -1,6 +1,7 @@
 import { html, css, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { Item } from './Item.js';
+import { Die } from './Die.js';
 
 export class VellumRandomTable extends LitElement {
   static styles = css`
@@ -17,7 +18,18 @@ export class VellumRandomTable extends LitElement {
     }
   `;
 
-  @property({ type: String }) die: string | null = null;
+  @property({
+    type: String,
+    converter: {
+      fromAttribute: (value) => {
+        return value ? new Die(value) : null
+      },
+      toAttribute: (value: Die) => {
+        return value!.toString()
+      }
+    }
+  })
+  die: Die | null = null;
 
   @property({ type: String }) title: string = '';
 
@@ -39,7 +51,8 @@ export class VellumRandomTable extends LitElement {
   }
 
   private updateItems() {
-    this.die = `d${this.items.map(i => i.weight).reduce((a, b) => a + b, 0)}`;
+    this.die = this.die ? this.die : new Die(`d${this.items.map(i => i.weight).reduce((a, b) => a + b, 0)}`)
+    console.log(this.die)
 
     const group: (a: Item, b: number) => [Item, number][] = item => [[item, 0]];
 
@@ -65,7 +78,7 @@ export class VellumRandomTable extends LitElement {
         return prev.concat(copied);
       });
 
-    alert(table[Math.floor(Math.random() * table.length)].value);
+    alert(table[this.die!.roll()].value);
   }
 
   render() {

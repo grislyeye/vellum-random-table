@@ -77,8 +77,7 @@ The `<vellum-item>` element should contain the text of the result, if this item 
 
 | Attribute | Description                                                  | Default                   |
 | --------- | ------------------------------------------------------------ | ------------------------- |
-| `weight`  | Determines how likely this item is to be selected. Weights greater than 1 increase the likelihood. A `2` makes it twice as likely, a `3` three times, etc.. | `1`                       |
-| `result`  | The dice result range for this item. This could be a number, like `5`, or a range, such as `2-3`. | Automatically calculated. |
+| `weight`  | Determines how likely this item is to be selected. Weights greater than 1 increase the likelihood. A `2` makes it twice as likely, a `3` three times, etc.. | `1` |
 
 ## Linting and formatting
 
