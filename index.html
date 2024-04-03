@@ -1,0 +1,29 @@
+<html>
+
+<head>
+  <title>vellum-random-table demo</title>
+  <script type="module">
+    import './vellum-random-table.js'
+  </script>
+  <script>
+    new EventSource('/esbuild').addEventListener('change', () => location.reload())
+  </script>
+</head>
+
+<body>
+  <vellum-random-table>
+    <table>
+      <tr>
+        <th>Encounter</th>
+      </tr>
+      <tr>
+        <td>1 wolf</td>
+      </tr>
+      <tr>
+        <td>2 goblins</td>
+      </tr>
+    </table>
+  </vellum-random-table>
+</body>
+
+</html>

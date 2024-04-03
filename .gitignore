@@ -1,23 +1,16 @@
-## editors
-/.idea
-/.vscode
-
-## system files
-.DS_Store
-
-## npm
 /node_modules/
-/npm-debug.log
-
-## testing
-/coverage/
-
-## temp folders
-/.tmp/
-
-# build
-/_site/
+/build/
+/lib/
 /dist/
-/out-tsc/
+/docs/
+.idea/*
 
-storybook-static
+.DS_Store
+coverage
+*.log
+
+vellum-random-table.js*
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
