@@ -2,9 +2,22 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
+    "target": "es6",
+    "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
+    "declaration": true,
     "strict": true,
+    "noImplicitAny": true /* Raise error on expressions and declarations with an implied 'any' type. */,
+    "strictNullChecks": true /* Enable strict null checks. */,
+    "strictFunctionTypes": true /* Enable strict checking of function types. */,
+    "noUnusedLocals": true /* Report errors on unused locals. */,
+    "noUnusedParameters": true /* Report errors on unused parameters. */,
+    "noImplicitReturns": true /* Report error when not all code paths in function return a value. */,
+    "noFallthroughCasesInSwitch": true /* Report errors for fallthrough cases in switch statement. */,
+    "importHelpers": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
     "noImplicitAny": true /* Raise error on expressions and declarations with an implied 'any' type. */,
     "strictNullChecks": true /* Enable strict null checks. */,
     "strictFunctionTypes": true /* Enable strict checking of function types. */,
@@ -19,8 +32,13 @@
     "experimentalDecorators": true,
     "sourceMap": true,
     "outDir": "./",
-    "types": ["node"],
-    "lib": ["ES6", "DOM"],
+    "types": [
+      "node"
+    ],
+    "lib": [
+      "ES6",
+      "DOM"
+    ],
     "plugins": [
       {
         "name": "ts-lit-plugin",
@@ -28,6 +46,11 @@
       }
     ]
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "**/*.test.ts"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts"
+  ]
 }
