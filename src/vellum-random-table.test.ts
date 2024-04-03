@@ -1,8 +1,10 @@
-import { test, expect, Page } from '@playwright/test'
-import { promises as fs } from "fs"
+import { test, expect, Page, Locator } from '@playwright/test'
+import { promises as fs } from 'fs'
+import * as cheerio from 'cheerio'
+import { randomUUID } from 'crypto';
 
 test('displays table', async ({ page }) => {
-  await fixture(page)(`
+  const fixture = await mountOn(page, `
     <vellum-random-table>
       <table>
         <tr>
@@ -18,19 +20,22 @@ test('displays table', async ({ page }) => {
     </vellum-random-table>
   `);
 
-  await expect(page.getByText('Encounter')).toBeVisible();
+  await expect(fixture.getByText('Encounter')).toBeVisible();
 });
 
-function fixture(page: Page): (_: string) => Promise<void> {
-  return async (fragment: string) => {
-    const code = await fs.readFile('./vellum-random-table.js')
+async function mountOn(page: Page, fragment: string): Promise<Locator> {
+  const code = await fs.readFile('./vellum-random-table.js')
+  const html = cheerio.load(fragment)('vellum-random-table')
+  const uuid = randomUUID()
+  const component = html.attr('data-testid', uuid)
 
-    await page.setContent(`
+  await page.setContent(`
       <script>
         ${code.toString()}
       </script>
 
-      ${fragment}
+      ${component.toString()}
   `);
-  }
+
+  return await page.getByTestId(uuid)
 }
