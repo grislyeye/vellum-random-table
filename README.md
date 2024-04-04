@@ -10,19 +10,23 @@ The simplest example is a table with 1 column:
 
 ```html
 <vellum-random-table>
+  <caption>Random Encounters</caption>
   <table>
-     <tr>
-      <th>Encounter</th>
-    </tr>
-    <tr>
-      <td>1 wolf</td>
-    </tr>
-    <tr>
-      <td>2 goblins</td>
-    </tr>
+    <thead>
+      <tr>
+        <th>Encounter</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1 wolf</td>
+      </tr>
+      <tr>
+        <td>2 goblins</td>
+      </tr>
+    </tbody>
   </table>
 </vellum-random-table>
 ```
 
 ## Contributing
-
