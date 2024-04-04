@@ -17,8 +17,8 @@
   "type": "module",
   "scripts": {
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
-    "test": "npm run build:esbuild && npx playwright test",
-    "clean": "rm -rf dist docs playwright-report test-results vellum-random-table.js vellum-random-table.js.map",
+    "test": "npm run build:dev && npx playwright test",
+    "clean": "rm -rf playwright-report test-results vellum-random-table.js vellum-random-table.js.map",
     "shell": "ts-node",
     "build": "npm run clean && npm run build:prod",
     "build:prod": "esbuild src/vellum-random-table.ts --bundle --minify --sourcemap=external --outfile=vellum-random-table.js",

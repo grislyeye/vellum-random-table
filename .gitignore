@@ -1,8 +1,4 @@
 /node_modules/
-/build/
-/lib/
-/dist/
-/docs/
 
 .DS_Store
 coverage
