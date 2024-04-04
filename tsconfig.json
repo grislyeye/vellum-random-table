@@ -25,6 +25,12 @@
     "lib": [
       "ES6",
       "DOM"
+    ],
+    "plugins": [
+      {
+        "name": "ts-lit-plugin",
+        "strict": true
+      }
     ]
   },
   "include": [

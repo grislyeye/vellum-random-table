@@ -20,8 +20,7 @@
     "test": "npm run build:esbuild && npx playwright test",
     "clean": "rm -rf dist build package",
     "shell": "ts-node",
-    "docs": "typedoc --entryPoints src/main.ts",
-    "build": "npm run clean && npm run build:esbuild",
+    "build": "npm run clean && npm run build:esbuild && custom-elements-manifest analyze --litelement",
     "build:esbuild": "esbuild src/vellum-random-table.ts --bundle --minify --sourcemap=external --outfile=vellum-random-table.js",
     "build:dev": "esbuild src/vellum-random-table.ts --bundle --outfile=vellum-random-table.js",
     "build:watch": "esbuild src/vellum-random-table.ts --bundle --watch --outfile=vellum-random-table.js --servedir=./"
@@ -30,6 +29,7 @@
     "lit": "^3.1.2"
   },
   "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.9.4",
     "@playwright/test": "^1.42.1",
     "@types/node": "^20.12.2",
     "@typescript-eslint/eslint-plugin": "^7.5.0",
@@ -37,9 +37,8 @@
     "cheerio": "^1.0.0-rc.12",
     "esbuild": "^0.20.2",
     "eslint": "^8.57.0",
+    "ts-lit-plugin": "^2.0.2",
     "ts-node": "^10.9.2",
-    "tslib": "^2.6.2",
-    "typedoc": "^0.25.12",
     "typescript": "^5.4.3"
   }
 }

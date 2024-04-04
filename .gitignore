@@ -14,3 +14,4 @@ vellum-random-table.js*
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+custom-elements.json
