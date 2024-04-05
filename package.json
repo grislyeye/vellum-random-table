@@ -1,76 +1,45 @@
 {
   "name": "vellum-random-table",
-  "description": "Custom element for displaying and rolling random tables",
+  "version": "0.0.0",
+  "description": "Web component for interactive random tables",
+  "author": "Ric Wood <ric@grislyeye.com>",
+  "repository": "https://github.com/grislyeye/vellum-random-table",
   "license": "MIT",
-  "author": "vellum-random-table",
-  "version": "0.0.1",
-  "main": "dist/src/index.js",
-  "module": "dist/src/index.js",
-  "exports": {
-    ".": "./dist/src/index.js",
-    "./vellum-random-table.js": "./dist/src/vellum-random-table.js"
-  },
+  "keywords": [
+    "typescript",
+    "lit",
+    "lit-element",
+    "rpg",
+    "ttrpg",
+    "web-component"
+  ],
+  "module": "vellum-random-table.js",
+  "type": "module",
   "scripts": {
-    "start": "tsc && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"wds\"",
-    "build": "tsc",
-    "prepublish": "tsc",
-    "lint": "eslint --ext .ts,.html . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
-    "format": "eslint --ext .ts,.html . --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore"
+    "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx && npx prettier . --check",
+    "lint:format": "npx prettier . --write",
+    "clean": "rm -rf playwright-report test-results vellum-random-table.js vellum-random-table.js.map",
+    "build": "npm run clean && npm run build:prod",
+    "build:prod": "esbuild src/vellum-random-table.ts --bundle --minify --sourcemap=external --outfile=vellum-random-table.js",
+    "build:dev": "esbuild src/vellum-random-table.ts --bundle --outfile=vellum-random-table.js",
+    "build:watch": "esbuild src/vellum-random-table.ts --bundle --watch --outfile=vellum-random-table.js --servedir=./",
+    "build:docs": "npm run build:dev && mkdir docs && cp vellum-random-table.js vellum-random-table.js.map index.html docs/",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "lit": "^2.2.3"
+    "lit": "^3.1.2",
+    "tslib": "^2.6.2"
   },
   "devDependencies": {
-    "@open-wc/eslint-config": "^7.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.23.0",
-    "@typescript-eslint/parser": "^5.23.0",
-    "@web/dev-server": "^0.1.31",
-    "concurrently": "^7.1.0",
-    "eslint": "^8.15.0",
-    "eslint-config-prettier": "^8.5.0",
-    "husky": "^8.0.1",
-    "lint-staged": "^12.4.1",
-    "prettier": "^2.6.2",
-    "tslib": "^2.4.0",
-    "typescript": "^4.6.4"
-  },
-  "eslintConfig": {
-    "parser": "@typescript-eslint/parser",
-    "extends": [
-      "@open-wc",
-      "prettier"
-    ],
-    "plugins": [
-      "@typescript-eslint"
-    ],
-    "rules": {
-      "no-unused-vars": "off",
-      "@typescript-eslint/no-unused-vars": [
-        "error"
-      ],
-      "import/no-unresolved": "off",
-      "import/extensions": [
-        "error",
-        "always",
-        {
-          "ignorePackages": true
-        }
-      ]
-    }
-  },
-  "prettier": {
-    "singleQuote": true,
-    "arrowParens": "avoid"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.ts": [
-      "eslint --fix",
-      "prettier --write"
-    ]
+    "@custom-elements-manifest/analyzer": "^0.9.4",
+    "@types/node": "^20.12.2",
+    "@typescript-eslint/eslint-plugin": "^7.5.0",
+    "@typescript-eslint/parser": "^7.5.0",
+    "cheerio": "^1.0.0-rc.12",
+    "esbuild": "^0.20.2",
+    "eslint": "^8.57.0",
+    "prettier": "3.2.5",
+    "ts-lit-plugin": "^2.0.2",
+    "typescript": "^5.4.3"
   }
 }
