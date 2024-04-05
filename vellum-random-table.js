@@ -627,11 +627,57 @@
     })(t4, e5, o5);
   }
 
+  // src/dice.ts
+  var Die = class _Die {
+    static {
+      this.EMPTY_STR_TO_UNDEFINED = (str) => str === "" ? void 0 : str;
+    }
+    constructor(notation) {
+      this.notation = notation;
+      const diceNotation = /^(\d*)d(\d+)(\s*(\+|-)\s*(\d+))?$/g;
+      const [, number = "1", dice = "1", , plusMinus = "+", modifier = "0"] = diceNotation.exec(this.notation).map(_Die.EMPTY_STR_TO_UNDEFINED);
+      this.number = parseInt(number);
+      this.dice = parseInt(dice);
+      this.modifier = parseInt(plusMinus + modifier);
+    }
+    roll() {
+      const rolls = Array.from(
+        { length: this.number },
+        () => Math.floor(Math.random() * this.dice + 1)
+      );
+      return rolls.reduce((a3, b3) => a3 + b3, 0) + this.modifier;
+    }
+    toString() {
+      return this.notation;
+    }
+  };
+
+  // src/range.ts
+  var EMPTY_STR_TO_UNDEFINED = (str) => str === "" ? void 0 : str;
+  function parseRange(notation) {
+    const rangeNotation = /^(\d*)(\W?-(\W?\d*))?$/g;
+    const [, start, , end] = rangeNotation.exec(notation).map(EMPTY_STR_TO_UNDEFINED);
+    if (start && !end) {
+      return [parseInt(start)];
+    } else if (start && end) {
+      const size = parseInt(end) - parseInt(start) + 1;
+      return [...Array(size).keys()].map((i4) => i4 + parseInt(start));
+    }
+    return;
+  }
+
   // src/vellum-random-table.ts
   var VellumRandomTable = class extends s3 {
     connectedCallback() {
       super.connectedCallback();
       this.button.addEventListener("click", () => this.roll());
+    }
+    get mode() {
+      if (this.table.rows[0].cells.length == 2) {
+        return 1 /* TwoColumn */;
+      } else {
+        return 0 /* FirstColumn */;
+      }
     }
     get button() {
       return this.querySelector("button");
@@ -639,8 +685,17 @@
     get table() {
       return this.querySelector("table");
     }
-    get selection() {
-      return Array.from(this.table.tBodies).flatMap((tbody) => Array.from(tbody.rows)).map((row) => row.cells[0]).map((cell) => cell.textContent).map((content) => content ? content : "").map((content) => content.trim());
+    get die() {
+      const maybeDieNotation = this.table.rows[0].cells[0].textContent;
+      if (maybeDieNotation)
+        return new Die(maybeDieNotation);
+      return void 0;
+    }
+    ranges(column) {
+      return this.selection(column).map((content) => content.trim()).map((cell) => parseRange(cell)).filter((item) => !!item);
+    }
+    selection(column) {
+      return Array.from(this.table.tBodies).flatMap((tbody) => Array.from(tbody.rows)).map((row) => row.cells[column]).map((cell) => cell.textContent).map((content) => content ? content : "").map((content) => content.trim());
     }
     get resultTarget() {
       if (this.select)
@@ -648,13 +703,29 @@
       return void 0;
     }
     roll() {
-      if (this.resultTarget) {
-        const selection = this.selection;
+      const target = this.resultTarget;
+      if (!target)
+        return;
+      if (this.mode == 0 /* FirstColumn */) {
+        const selection = this.selection(0);
         const result = selection[Math.floor(Math.random() * selection.length)];
-        if (this.resultTarget instanceof HTMLInputElement)
-          this.resultTarget.value = result;
-        else
-          this.resultTarget.textContent = result;
+        this.display(result);
+      } else if (this.mode == 1 /* TwoColumn */) {
+        const ranges = this.ranges(0);
+        const selection = this.selection(1);
+        const roll = this.die?.roll();
+        if (roll) {
+          const index = ranges.findIndex((range) => range.includes(roll));
+          const result = selection[index];
+          this.display(`${result} (${roll})`);
+        }
+      }
+    }
+    display(result) {
+      if (this.resultTarget && this.resultTarget instanceof HTMLInputElement) {
+        this.resultTarget.value = result;
+      } else if (this.resultTarget) {
+        this.resultTarget.textContent = result;
       }
     }
     render() {
