@@ -23,7 +23,7 @@
     "build:prod": "esbuild src/vellum-random-table.ts --bundle --minify --sourcemap=external --outfile=vellum-random-table.js",
     "build:dev": "esbuild src/vellum-random-table.ts --bundle --outfile=vellum-random-table.js",
     "build:watch": "esbuild src/vellum-random-table.ts --bundle --watch --outfile=vellum-random-table.js --servedir=./",
-    "build:docs": "npm run build:dev && mkdir docs && cp vellum-random-table.js vellum-random-table.js.map index.html docs/",
+    "build:docs": "npm run build:dev && mkdir docs && cp vellum-random-table.js index.html docs/",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
