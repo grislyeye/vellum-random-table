@@ -671,6 +671,7 @@
     constructor() {
       super(...arguments);
       this.preroll = false;
+      this.hideroll = false;
     }
     connectedCallback() {
       super.connectedCallback();
@@ -714,8 +715,12 @@
         return;
       if (this.mode == 0 /* FirstColumn */) {
         const selection = this.selection(0);
-        const result = selection[Math.floor(Math.random() * selection.length)];
-        this.display(result);
+        const roll = Math.floor(Math.random() * selection.length);
+        const result = selection[roll];
+        if (!this.hideroll)
+          this.display(`${result} (${roll + 1})`);
+        else
+          this.display(result);
       } else if (this.mode == 1 /* TwoColumn */) {
         const ranges = this.ranges(0);
         const selection = this.selection(1);
@@ -723,7 +728,10 @@
         if (roll) {
           const index = ranges.findIndex((range) => range.includes(roll));
           const result = selection[index];
-          this.display(`${result} (${roll})`);
+          if (!this.hideroll)
+            this.display(`${result} (${roll})`);
+          else
+            this.display(result);
         }
       }
     }
@@ -755,6 +763,9 @@
   __decorateClass([
     n4({ type: Boolean })
   ], VellumRandomTable.prototype, "preroll", 2);
+  __decorateClass([
+    n4({ type: Boolean })
+  ], VellumRandomTable.prototype, "hideroll", 2);
   VellumRandomTable = __decorateClass([
     t3("vellum-random-table")
   ], VellumRandomTable);
