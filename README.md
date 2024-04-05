@@ -1,17 +1,17 @@
-# `vellum-random-table`
+# `<vellum-random-table>`
 
-Web component for interactive, roll-able random tables.
+Web component for interactive random tables.
 
-## Usage
+**[Demo](https://grislyeye.github.io/vellum-random-table/)**
 
-The `<vellum-random-table>` element should contain a table. This component detects the elements of this table and uses them to roll random results.
+### Examples
 
-The simplest example is a table with 1 column:
+Simple, one-column table (elements are selected at random with equal weight):
 
 ```html
 <vellum-random-table>
-  <caption>Random Encounters</caption>
   <table>
+    <caption>Random Encounters</caption>
     <thead>
       <tr>
         <th>Encounter</th>
@@ -30,4 +30,14 @@ The simplest example is a table with 1 column:
 </vellum-random-table>
 ```
 
-## Contributing
+## Installation
+
+Install via [npm](https://www.npmjs.com/package/@daviddarnes/component-name): `npm install vellum-random-table`.
+
+### Usage
+
+Include the `<script>` in your project:
+
+```html
+<script type="module" src="vellum-random-table.js"></script>
+```
