@@ -22,3 +22,4 @@ jobs:
         with:
           folder: docs
           token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
