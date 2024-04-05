@@ -1,5 +1,5 @@
 import { LitElement, css, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 
 @customElement('vellum-random-table')
 export class VellumRandomTable extends LitElement {
@@ -7,17 +7,10 @@ export class VellumRandomTable extends LitElement {
     :host {
       display: inline-block;
     }
-
-    #container {
-      display: flex;
-      flex-direction: column;
-    }
-
-    #results {
-      border-top: 1px solid;
-      border-bottom: 1px solid;
-    }
   `;
+
+  @property()
+  select: string | undefined
 
   connectedCallback(): void {
     super.connectedCallback()
@@ -42,14 +35,19 @@ export class VellumRandomTable extends LitElement {
       .map(content => content.trim())
   }
 
-  private get resultBox(): HTMLElement {
-    return this.shadowRoot?.querySelector('#results') as HTMLElement
+  private get resultTarget(): HTMLElement | undefined {
+    if (this.select) return this.querySelector(this.select) as HTMLElement
+    return undefined
   }
 
   roll(): void {
-    const selection = this.selection
-    const result = selection[Math.floor(Math.random() * selection.length)]
-    this.resultBox.textContent = result
+    if (this.resultTarget) {
+      const selection = this.selection
+      const result = selection[Math.floor(Math.random() * selection.length)]
+
+      if (this.resultTarget instanceof HTMLInputElement) this.resultTarget.value = result
+      else this.resultTarget.textContent = result
+    }
   }
 
   render() {
@@ -57,10 +55,6 @@ export class VellumRandomTable extends LitElement {
       <div id="container">
         <div id="table">
           <slot></slot>
-        </div>
-        <p>Result:</p>
-        <div id="results" role="alert" aria-label="Roll Result">
-          &nbsp;
         </div>
       </div>
     `;

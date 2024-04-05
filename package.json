@@ -1,7 +1,7 @@
 {
   "name": "vellum-random-table",
   "version": "0.0.0",
-  "description": "Web component for interactive, roll-able random tables",
+  "description": "Web component for interactive random tables",
   "author": "Ric Wood <ric@grislyeye.com>",
   "repository": "https://github.com/grislyeye/vellum-random-table",
   "license": "MIT",
@@ -18,12 +18,12 @@
   "scripts": {
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
     "clean": "rm -rf playwright-report test-results vellum-random-table.js vellum-random-table.js.map",
-    "shell": "ts-node",
     "build": "npm run clean && npm run build:prod",
     "build:prod": "esbuild src/vellum-random-table.ts --bundle --minify --sourcemap=external --outfile=vellum-random-table.js",
     "build:dev": "esbuild src/vellum-random-table.ts --bundle --outfile=vellum-random-table.js",
     "build:watch": "esbuild src/vellum-random-table.ts --bundle --watch --outfile=vellum-random-table.js --servedir=./",
-    "build:docs": "npm run build:dev && mkdir docs && cp vellum-random-table.js vellum-random-table.js.map index.html docs/"
+    "build:docs": "npm run build:dev && mkdir docs && cp vellum-random-table.js vellum-random-table.js.map index.html docs/",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "lit": "^3.1.2",
@@ -31,7 +31,6 @@
   },
   "devDependencies": {
     "@custom-elements-manifest/analyzer": "^0.9.4",
-    "@playwright/test": "^1.42.1",
     "@types/node": "^20.12.2",
     "@typescript-eslint/eslint-plugin": "^7.5.0",
     "@typescript-eslint/parser": "^7.5.0",
@@ -39,7 +38,6 @@
     "esbuild": "^0.20.2",
     "eslint": "^8.57.0",
     "ts-lit-plugin": "^2.0.2",
-    "ts-node": "^10.9.2",
     "typescript": "^5.4.3"
   }
 }
