@@ -22,6 +22,9 @@ export class VellumRandomTable extends LitElement {
   @property({ type: Boolean })
   preroll: boolean = false
 
+  @property({ type: Boolean })
+  hideroll: boolean = false
+
   connectedCallback(): void {
     super.connectedCallback()
 
@@ -78,8 +81,11 @@ export class VellumRandomTable extends LitElement {
 
     if (this.mode == TableMode.FirstColumn) {
       const selection = this.selection(0)
-      const result = selection[Math.floor(Math.random() * selection.length)]
-      this.display(result)
+      const roll = Math.floor(Math.random() * selection.length)
+      const result = selection[roll]
+
+      if (!this.hideroll) this.display(`${result} (${roll + 1})`)
+      else this.display(result)
     } else if (this.mode == TableMode.TwoColumn) {
       const ranges = this.ranges(0)
       const selection = this.selection(1)
@@ -90,7 +96,9 @@ export class VellumRandomTable extends LitElement {
         const index = ranges.findIndex((range) => range.includes(roll))
 
         const result = selection[index]
-        this.display(`${result} (${roll})`)
+
+        if (!this.hideroll) this.display(`${result} (${roll})`)
+        else this.display(result)
       }
     }
   }
