@@ -668,9 +668,15 @@
 
   // src/vellum-random-table.ts
   var VellumRandomTable = class extends s3 {
+    constructor() {
+      super(...arguments);
+      this.preroll = false;
+    }
     connectedCallback() {
       super.connectedCallback();
       this.button.addEventListener("click", () => this.roll());
+      if (this.preroll)
+        this.roll();
     }
     get mode() {
       if (this.table.rows[0].cells.length == 2) {
@@ -746,6 +752,9 @@
   __decorateClass([
     n4()
   ], VellumRandomTable.prototype, "select", 2);
+  __decorateClass([
+    n4({ type: Boolean })
+  ], VellumRandomTable.prototype, "preroll", 2);
   VellumRandomTable = __decorateClass([
     t3("vellum-random-table")
   ], VellumRandomTable);
