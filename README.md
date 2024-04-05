@@ -4,9 +4,9 @@ Web component for interactive random tables.
 
 **[Demo](https://grislyeye.github.io/vellum-random-table/)**
 
-| Attribute | Description                                    |
-| --------- | ---------------------------------------------- |
-| `select`  | The target container/input to display results. |
+| Attribute | Description                                              |
+| --------- | -------------------------------------------------------- |
+| `select`  | CSS selector for the container/input to display results. |
 
 ### Examples
 
