@@ -19,11 +19,21 @@ export class VellumRandomTable extends LitElement {
     }
   `;
 
-  get table(): HTMLTableElement {
+  connectedCallback(): void {
+    super.connectedCallback()
+
+    this.button.addEventListener('click', () => this.roll())
+  }
+
+  private get button(): HTMLButtonElement {
+    return this.querySelector('button') as HTMLButtonElement
+  }
+
+  private get table(): HTMLTableElement {
     return this.querySelector('table') as HTMLTableElement
   }
 
-  get list(): string[] {
+  private get selection(): string[] {
     return Array.from(this.table.tBodies)
       .flatMap(tbody => Array.from(tbody.rows))
       .map(row => row.cells[0])
@@ -32,14 +42,14 @@ export class VellumRandomTable extends LitElement {
       .map(content => content.trim())
   }
 
-  get resultBox(): HTMLTableElement {
-    return this.shadowRoot?.querySelector('#results') as HTMLTableElement
+  private get resultBox(): HTMLElement {
+    return this.shadowRoot?.querySelector('#results') as HTMLElement
   }
 
   roll(): void {
-    const result = this.list[Math.floor(Math.random() * this.list.length)]
+    const selection = this.selection
+    const result = selection[Math.floor(Math.random() * selection.length)]
     this.resultBox.textContent = result
-    console.log(result)
   }
 
   render() {
@@ -47,7 +57,6 @@ export class VellumRandomTable extends LitElement {
       <div id="container">
         <div id="table">
           <slot></slot>
-          <button @click=${this.roll}>Roll 🎲</button>
         </div>
         <p>Result:</p>
         <div id="results" role="alert" aria-label="Roll Result">

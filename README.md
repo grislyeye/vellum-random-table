@@ -26,6 +26,7 @@ The simplest example is a table with 1 column:
       </tr>
     </tbody>
   </table>
+  <button type="submit">Roll</button>
 </vellum-random-table>
 ```
 

@@ -22,6 +22,7 @@ test('displays table', async ({ page }) => {
           </tr>
         </tbody>
       </table>
+      <button type="submit">Roll</button>
     </vellum-random-table>
   `);
 
@@ -34,6 +35,7 @@ test('displays empty table', async ({ page }) => {
       <table>
         <caption>Random Encounters</caption>
       </table>
+      <button type="submit">Roll</button>
     </vellum-random-table>
   `);
 
@@ -59,14 +61,14 @@ test('rolls on random table', async ({ page }) => {
           </tr>
         </tbody>
       </table>
+      <button>Roll</button>
     </vellum-random-table>
   `);
 
   await fixture.getByRole('button', { name: 'Roll' }).click()
   const result = await fixture.getByRole('alert', { name: 'Roll Result' }).textContent()
 
-
-  expect(['1 wolf', '2 goblins']).toContain(result)
+  expect(['1 wolf', '2 goblins']).toContain(result?.trim())
 });
 
 async function mountOn(page: Page, fragment: string): Promise<Locator> {
