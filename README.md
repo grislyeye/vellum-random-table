@@ -4,16 +4,17 @@ Web component for interactive random tables.
 
 **[Demo](https://grislyeye.github.io/vellum-random-table/)**
 
-| Attribute | Description                                              |
-| --------- | -------------------------------------------------------- |
-| `select`  | CSS selector for the container/input to display results. |
+| Attribute | Description                                              | Default |
+| --------- | -------------------------------------------------------- | ------- |
+| `select`  | CSS selector for the container/input to display results. |         |
+| `preroll` | Load table with pre-rolled result.                       | `false` |
 
 ### Examples
 
 Simple, one-column table (elements are selected at random with equal weight):
 
 ```html
-<vellum-random-table select="#result">
+<vellum-random-table select="#result" preroll>
   <caption>
     Random Encounters
   </caption>

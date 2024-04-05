@@ -19,10 +19,14 @@ export class VellumRandomTable extends LitElement {
   @property()
   select: string | undefined
 
+  @property({ type: Boolean })
+  preroll: boolean = false
+
   connectedCallback(): void {
     super.connectedCallback()
 
     this.button.addEventListener('click', () => this.roll())
+    if (this.preroll) this.roll()
   }
 
   get mode(): TableMode {
