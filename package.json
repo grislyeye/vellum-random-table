@@ -16,7 +16,8 @@
   "module": "vellum-random-table.js",
   "type": "module",
   "scripts": {
-    "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx && npx prettier . --check",
+    "lint:format": "npx prettier . --write",
     "clean": "rm -rf playwright-report test-results vellum-random-table.js vellum-random-table.js.map",
     "build": "npm run clean && npm run build:prod",
     "build:prod": "esbuild src/vellum-random-table.ts --bundle --minify --sourcemap=external --outfile=vellum-random-table.js",
@@ -37,6 +38,7 @@
     "cheerio": "^1.0.0-rc.12",
     "esbuild": "^0.20.2",
     "eslint": "^8.57.0",
+    "prettier": "3.2.5",
     "ts-lit-plugin": "^2.0.2",
     "typescript": "^5.4.3"
   }

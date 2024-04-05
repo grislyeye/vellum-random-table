@@ -1,38 +1,40 @@
 <html>
+  <head>
+    <title>vellum-random-table demo</title>
+    <script type="module">
+      import './vellum-random-table.js'
+    </script>
+    <script>
+      new EventSource('/esbuild').addEventListener('change', () =>
+        location.reload(),
+      )
+    </script>
+  </head>
 
-<head>
-  <title>vellum-random-table demo</title>
-  <script type="module">
-    import './vellum-random-table.js'
-  </script>
-  <script>
-    new EventSource('/esbuild').addEventListener('change', () => location.reload())
-  </script>
-</head>
+  <body>
+    <h2>One-column random table</h2>
 
-<body>
-  <h2>One-column random table</h2>
-
-  <vellum-random-table select="#result">
-    <caption>Random Encounters</caption>
-    <table>
-      <thead>
-        <tr>
-          <th>Encounter</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1 wolf</td>
-        </tr>
-        <tr>
-          <td>2 goblins</td>
-        </tr>
-      </tbody>
-    </table>
-    <button>Roll</button>
-    <input id="result" type="text"></input>
-  </vellum-random-table>
-</body>
-
+    <vellum-random-table select="#result">
+      <caption>
+        Random Encounters
+      </caption>
+      <table>
+        <thead>
+          <tr>
+            <th>Encounter</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1 wolf</td>
+          </tr>
+          <tr>
+            <td>2 goblins</td>
+          </tr>
+        </tbody>
+      </table>
+      <button>Roll</button>
+      <input id="result" type="text" />
+    </vellum-random-table>
+  </body>
 </html>

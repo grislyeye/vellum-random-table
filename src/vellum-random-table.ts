@@ -1,5 +1,5 @@
-import { LitElement, css, html } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { LitElement, css, html } from 'lit'
+import { customElement, property } from 'lit/decorators.js'
 
 @customElement('vellum-random-table')
 export class VellumRandomTable extends LitElement {
@@ -7,7 +7,7 @@ export class VellumRandomTable extends LitElement {
     :host {
       display: inline-block;
     }
-  `;
+  `
 
   @property()
   select: string | undefined
@@ -28,11 +28,11 @@ export class VellumRandomTable extends LitElement {
 
   private get selection(): string[] {
     return Array.from(this.table.tBodies)
-      .flatMap(tbody => Array.from(tbody.rows))
-      .map(row => row.cells[0])
-      .map(cell => cell.textContent)
-      .map(content => content ? content : "")
-      .map(content => content.trim())
+      .flatMap((tbody) => Array.from(tbody.rows))
+      .map((row) => row.cells[0])
+      .map((cell) => cell.textContent)
+      .map((content) => (content ? content : ''))
+      .map((content) => content.trim())
   }
 
   private get resultTarget(): HTMLElement | undefined {
@@ -45,7 +45,8 @@ export class VellumRandomTable extends LitElement {
       const selection = this.selection
       const result = selection[Math.floor(Math.random() * selection.length)]
 
-      if (this.resultTarget instanceof HTMLInputElement) this.resultTarget.value = result
+      if (this.resultTarget instanceof HTMLInputElement)
+        this.resultTarget.value = result
       else this.resultTarget.textContent = result
     }
   }
@@ -57,6 +58,6 @@ export class VellumRandomTable extends LitElement {
           <slot></slot>
         </div>
       </div>
-    `;
+    `
   }
 }

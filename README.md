@@ -9,9 +9,11 @@ Web component for interactive random tables.
 Simple, one-column table (elements are selected at random with equal weight):
 
 ```html
-<vellum-random-table>
+<vellum-random-table select="#result">
+  <caption>
+    Random Encounters
+  </caption>
   <table>
-    <caption>Random Encounters</caption>
     <thead>
       <tr>
         <th>Encounter</th>
@@ -26,13 +28,14 @@ Simple, one-column table (elements are selected at random with equal weight):
       </tr>
     </tbody>
   </table>
-  <button type="submit">Roll</button>
+  <button>Roll</button>
+  <input id="result" type="text" />
 </vellum-random-table>
 ```
 
 ## Installation
 
-Install via [npm](https://www.npmjs.com/package/@daviddarnes/component-name): `npm install vellum-random-table`.
+Install via [npm](https://www.npmjs.com/package/@daviddarnes/component-name): `npm i vellum-random-table -S`.
 
 ### Usage
 
