@@ -5,8 +5,4 @@ coverage
 *.log
 
 vellum-random-table.js*
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
 custom-elements.json

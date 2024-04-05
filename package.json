@@ -17,7 +17,6 @@
   "type": "module",
   "scripts": {
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx",
-    "test": "npm run build:dev && npx playwright test",
     "clean": "rm -rf playwright-report test-results vellum-random-table.js vellum-random-table.js.map",
     "shell": "ts-node",
     "build": "npm run clean && npm run build:prod",
