@@ -4,12 +4,12 @@ Web component for interactive random tables.
 
 **[Demo](https://grislyeye.github.io/vellum-random-table/)**
 
-| Attribute  | Description                                                                              | Default |
-| ---------- | ---------------------------------------------------------------------------------------- | ------- |
-| `select`   | CSS selector for the container/input to display results.                                 |         |
-| `preroll`  | Load table with pre-rolled result.                                                       | `false` |
-| `hideroll` | Hide rolls and just display the results.                                                 | `false` |
-| `hidecalc` | Show rolls but hide calculation (i.e. `1 + 4`). Always `false` when `hideroll == false`, | `false` |
+| Attribute  | Description                                                                        | Default |
+| ---------- | ---------------------------------------------------------------------------------- | ------- |
+| `select`   | The container/input to display roll results, identified by a CSS selector.         |         |
+| `preroll`  | Load table with pre-rolled result.                                                 | `false` |
+| `hideroll` | Hide rolls and just display the results.                                           | `false` |
+| `hidecalc` | Show rolls but hides calculations (i.e. `1 + 4`). Ignore when `hideroll == false`. | `false` |
 
 ### Examples
 
