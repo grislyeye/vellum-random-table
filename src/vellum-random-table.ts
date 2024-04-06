@@ -101,7 +101,7 @@ export class VellumRandomTable extends LitElement {
 
         if (!this.hideroll)
           this.display(
-            `${result} (${roll.result}${this.hidecalc ? '' : `= ${roll.rolls}`})`,
+            `${result} (${roll.result}${this.hidecalc ? '' : ` = ${roll.rolls}`})`,
           )
         else this.display(result)
       }
