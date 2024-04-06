@@ -42,11 +42,11 @@ class StandardDie extends Die {
 
     const diceNotation: RegExp = /^(\d*)d(\d+)(\s*(\+|-)\s*(\d+))?$/g
 
-    const [, number = '1', dice = '1', , plusMinus = '+', modifier = '0'] =
+    const [, number = '1', sides = '1', , plusMinus = '+', modifier = '0'] =
       diceNotation.exec(notation)!.map(EMPTY_STR_TO_UNDEFINED)
 
     this.number = parseInt(number)
-    this.sides = parseInt(dice)
+    this.sides = parseInt(sides)
     this.modifier = parseInt(plusMinus + modifier)
   }
 
