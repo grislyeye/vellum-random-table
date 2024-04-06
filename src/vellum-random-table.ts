@@ -25,6 +25,9 @@ export class VellumRandomTable extends LitElement {
   @property({ type: Boolean })
   hideroll: boolean = false
 
+  @property({ type: Boolean })
+  hidecalc: boolean = false
+
   connectedCallback(): void {
     super.connectedCallback()
 
@@ -97,7 +100,9 @@ export class VellumRandomTable extends LitElement {
         const result = selection[index]
 
         if (!this.hideroll)
-          this.display(`${result} (${roll.result} = ${roll.rolls})`)
+          this.display(
+            `${result} (${roll.result}${this.hidecalc ? '' : `= ${roll.rolls}`})`,
+          )
         else this.display(result)
       }
     }
