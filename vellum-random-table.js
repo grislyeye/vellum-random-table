@@ -766,9 +766,10 @@
       if (target && target instanceof HTMLInputElement && result.textContent) {
         target.value = `${result.textContent}${details ? ` (${details})` : ""}`;
       } else if (target) {
-        console.log(result.children);
         target.innerHTML = "";
-        Array.from(result.children).forEach((child) => target.appendChild(child));
+        Array.from(result.children).forEach((c4) => {
+          target.appendChild(c4.cloneNode(true));
+        });
         if (details)
           target.appendChild(document.createTextNode(` (${details})`));
       }
