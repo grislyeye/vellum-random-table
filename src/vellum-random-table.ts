@@ -56,7 +56,6 @@ export class VellumRandomTable extends LitElement {
 
   private ranges(column: number): Range[] {
     return this.selection(column)
-      .map((content) => content.trim())
       .map((cell) => parseRange(cell))
       .filter((item): item is Range => !!item)
   }
@@ -93,11 +92,12 @@ export class VellumRandomTable extends LitElement {
       const roll = this.die?.roll()
 
       if (roll) {
-        const index = ranges.findIndex((range) => range.includes(roll))
+        const index = ranges.findIndex((range) => range.includes(roll.result))
 
         const result = selection[index]
 
-        if (!this.hideroll) this.display(`${result} (${roll})`)
+        if (!this.hideroll)
+          this.display(`${result} (${roll.result} = ${roll.rolls})`)
         else this.display(result)
       }
     }

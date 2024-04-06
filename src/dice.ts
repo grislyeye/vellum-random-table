@@ -1,3 +1,8 @@
+export interface Roll {
+  result: number
+  rolls: string
+}
+
 export class Die {
   private static EMPTY_STR_TO_UNDEFINED = (str: string) =>
     str === '' ? undefined : str
@@ -8,7 +13,7 @@ export class Die {
   readonly modifier: number
 
   constructor(notation: string) {
-    this.notation = notation
+    this.notation = notation.trim()
 
     const diceNotation: RegExp = /^(\d*)d(\d+)(\s*(\+|-)\s*(\d+))?$/g
 
@@ -20,11 +25,21 @@ export class Die {
     this.modifier = parseInt(plusMinus + modifier)
   }
 
-  roll(): number {
+  roll(): Roll {
     const rolls = Array.from({ length: this.number }, () =>
       Math.floor(Math.random() * this.dice + 1),
     )
-    return rolls.reduce((a, b) => a + b, 0) + this.modifier
+
+    const result = rolls.reduce((a, b) => a + b, 0) + this.modifier
+    const rollsWithModifier =
+      this.modifier !== 0 ? [...rolls, this.modifier] : rolls
+
+    const roll: Roll = {
+      result,
+      rolls: rollsWithModifier.join(' + '),
+    }
+
+    return roll
   }
 
   toString(): string {
