@@ -59,17 +59,16 @@ export class VellumRandomTable extends LitElement {
 
   private ranges(column: number): Range[] {
     return this.selection(column)
+      .map((cell) => cell.textContent)
+      .filter((content): content is string => !!content)
       .map((cell) => parseRange(cell))
       .filter((item): item is Range => !!item)
   }
 
-  private selection(column: number): string[] {
+  private selection(column: number): HTMLElement[] {
     return Array.from(this.table.tBodies)
       .flatMap((tbody) => Array.from(tbody.rows))
       .map((row) => row.cells[column])
-      .map((cell) => cell.textContent)
-      .map((content) => (content ? content : ''))
-      .map((content) => content.trim())
   }
 
   private get resultTarget(): HTMLElement | undefined {
@@ -86,7 +85,7 @@ export class VellumRandomTable extends LitElement {
       const roll = Math.floor(Math.random() * selection.length)
       const result = selection[roll]
 
-      if (!this.hideroll) this.display(`${result} (${roll + 1})`)
+      if (!this.hideroll) this.display(result, `${roll + 1}`)
       else this.display(result)
     } else if (this.mode == TableMode.TwoColumn) {
       const ranges = this.ranges(0)
@@ -99,20 +98,29 @@ export class VellumRandomTable extends LitElement {
 
         const result = selection[index]
 
-        if (!this.hideroll)
-          this.display(
-            `${result} (${roll.result}${this.hidecalc ? '' : ` = ${roll.rolls}`})`,
-          )
-        else this.display(result)
+        if (!this.hideroll) {
+          const calc = this.hidecalc ? '' : ` = ${roll.rolls}`
+          this.display(result, `${roll.result}${calc}`)
+        } else {
+          this.display(result)
+        }
       }
     }
   }
 
-  private display(result: string): void {
-    if (this.resultTarget && this.resultTarget instanceof HTMLInputElement) {
-      this.resultTarget.value = result
-    } else if (this.resultTarget) {
-      this.resultTarget.textContent = result
+  private display(
+    result: HTMLElement,
+    details: string | undefined = undefined,
+  ): void {
+    const target = this.resultTarget
+
+    if (target && target instanceof HTMLInputElement && result.textContent) {
+      target.value = `${result.textContent}${details ? ` (${details})` : ''}`
+    } else if (target) {
+      console.log(result.children)
+      target.innerHTML = ''
+      Array.from(result.children).forEach((child) => target.appendChild(child))
+      if (details) target.appendChild(document.createTextNode(` (${details})`))
     }
   }
 
