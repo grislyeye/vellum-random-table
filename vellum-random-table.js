@@ -723,10 +723,10 @@
       return void 0;
     }
     ranges(column) {
-      return this.selection(column).map((cell) => parseRange(cell)).filter((item) => !!item);
+      return this.selection(column).map((cell) => cell.textContent).filter((content) => !!content).map((cell) => parseRange(cell)).filter((item) => !!item);
     }
     selection(column) {
-      return Array.from(this.table.tBodies).flatMap((tbody) => Array.from(tbody.rows)).map((row) => row.cells[column]).map((cell) => cell.textContent).map((content) => content ? content : "").map((content) => content.trim());
+      return Array.from(this.table.tBodies).flatMap((tbody) => Array.from(tbody.rows)).map((row) => row.cells[column]);
     }
     get resultTarget() {
       if (this.select)
@@ -742,7 +742,7 @@
         const roll = Math.floor(Math.random() * selection.length);
         const result = selection[roll];
         if (!this.hideroll)
-          this.display(`${result} (${roll + 1})`);
+          this.display(result, `${roll + 1}`);
         else
           this.display(result);
       } else if (this.mode == 1 /* TwoColumn */) {
@@ -752,20 +752,25 @@
         if (roll) {
           const index = ranges.findIndex((range) => range.includes(roll.result));
           const result = selection[index];
-          if (!this.hideroll)
-            this.display(
-              `${result} (${roll.result}${this.hidecalc ? "" : ` = ${roll.rolls}`})`
-            );
-          else
+          if (!this.hideroll) {
+            const calc = this.hidecalc ? "" : ` = ${roll.rolls}`;
+            this.display(result, `${roll.result}${calc}`);
+          } else {
             this.display(result);
+          }
         }
       }
     }
-    display(result) {
-      if (this.resultTarget && this.resultTarget instanceof HTMLInputElement) {
-        this.resultTarget.value = result;
-      } else if (this.resultTarget) {
-        this.resultTarget.textContent = result;
+    display(result, details = void 0) {
+      const target = this.resultTarget;
+      if (target && target instanceof HTMLInputElement && result.textContent) {
+        target.value = `${result.textContent}${details ? ` (${details})` : ""}`;
+      } else if (target) {
+        console.log(result.children);
+        target.innerHTML = "";
+        Array.from(result.children).forEach((child) => target.appendChild(child));
+        if (details)
+          target.appendChild(document.createTextNode(` (${details})`));
       }
     }
     render() {
