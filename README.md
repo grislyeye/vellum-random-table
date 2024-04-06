@@ -1,4 +1,4 @@
-# `<vellum-random-table>`
+# `<vellum-random-table>` [![Lint](https://github.com/grislyeye/vellum-random-table/actions/workflows/lint-and-test.yml/badge.svg)](https://github.com/grislyeye/vellum-random-table/actions/workflows/lint-and-test.yml)
 
 Web component for interactive random tables.
 
