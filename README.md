@@ -8,7 +8,7 @@ Web component for interactive random tables.
 | ---------- | -------------------------------------------------------- | ------- |
 | `select`   | CSS selector for the container/input to display results. |         |
 | `preroll`  | Load table with pre-rolled result.                       | `false` |
-| `hideroll` | Display dice roll in parenthesis after roll.             | `false` |
+| `hideroll` | Hide rolls and just display the results.                 | `false` |
 
 ### Examples
 
