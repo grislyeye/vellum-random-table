@@ -695,6 +695,7 @@
       super(...arguments);
       this.preroll = false;
       this.hideroll = false;
+      this.hidecalc = false;
     }
     connectedCallback() {
       super.connectedCallback();
@@ -752,7 +753,9 @@
           const index = ranges.findIndex((range) => range.includes(roll.result));
           const result = selection[index];
           if (!this.hideroll)
-            this.display(`${result} (${roll.result} = ${roll.rolls})`);
+            this.display(
+              `${result} (${roll.result}${this.hidecalc ? "" : `= ${roll.rolls}`})`
+            );
           else
             this.display(result);
         }
@@ -789,6 +792,9 @@
   __decorateClass([
     n4({ type: Boolean })
   ], VellumRandomTable.prototype, "hideroll", 2);
+  __decorateClass([
+    n4({ type: Boolean })
+  ], VellumRandomTable.prototype, "hidecalc", 2);
   VellumRandomTable = __decorateClass([
     t3("vellum-random-table")
   ], VellumRandomTable);
