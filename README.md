@@ -17,9 +17,6 @@ Simple, one-column table (elements are selected at random with equal weight):
 
 ```html
 <vellum-random-table select="#result" preroll hideroll>
-  <caption>
-    Random Encounters
-  </caption>
   <table>
     <thead>
       <tr>
@@ -44,9 +41,6 @@ Two-column table where items are selected by a dice roll:
 
 ```html
 <vellum-random-table select="#result">
-  <caption>
-    Random Encounters
-  </caption>
   <table>
     <thead>
       <tr>
@@ -78,9 +72,6 @@ Two-column table where items are selected by a d66:
 
 ```html
 <vellum-random-table select="#result" hidecalc>
-  <caption>
-    Random Encounters
-  </caption>
   <table>
     <thead>
       <tr>
