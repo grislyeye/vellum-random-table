@@ -628,22 +628,42 @@
   }
 
   // src/dice.ts
-  var Die = class _Die {
-    static {
-      this.EMPTY_STR_TO_UNDEFINED = (str) => str === "" ? void 0 : str;
+  var EMPTY_STR_TO_UNDEFINED = (str) => str === "" ? void 0 : str;
+  function rollDice(sides) {
+    return Math.floor(Math.random() * sides + 1);
+  }
+  var Die = class {
+    static from(notation) {
+      switch (notation) {
+        case "d66":
+          return D66;
+        default:
+          return new StandardDie(notation);
+      }
     }
+  };
+  var D66 = new class extends Die {
+    roll() {
+      const rolls = [rollDice(6), rollDice(6)];
+      return {
+        result: parseInt(`${rolls[0]}${rolls[1]}`),
+        rolls: `${rolls[0]} + ${rolls[1]}`
+      };
+    }
+  }();
+  var StandardDie = class extends Die {
     constructor(notation) {
-      this.notation = notation.trim();
+      super();
       const diceNotation = /^(\d*)d(\d+)(\s*(\+|-)\s*(\d+))?$/g;
-      const [, number = "1", dice = "1", , plusMinus = "+", modifier = "0"] = diceNotation.exec(this.notation).map(_Die.EMPTY_STR_TO_UNDEFINED);
+      const [, number = "1", dice = "1", , plusMinus = "+", modifier = "0"] = diceNotation.exec(notation).map(EMPTY_STR_TO_UNDEFINED);
       this.number = parseInt(number);
-      this.dice = parseInt(dice);
+      this.sides = parseInt(dice);
       this.modifier = parseInt(plusMinus + modifier);
     }
     roll() {
       const rolls = Array.from(
         { length: this.number },
-        () => Math.floor(Math.random() * this.dice + 1)
+        () => rollDice(this.sides)
       );
       const result = rolls.reduce((a3, b3) => a3 + b3, 0) + this.modifier;
       const rollsWithModifier = this.modifier !== 0 ? [...rolls, this.modifier] : rolls;
@@ -653,16 +673,13 @@
       };
       return roll;
     }
-    toString() {
-      return this.notation;
-    }
   };
 
   // src/range.ts
-  var EMPTY_STR_TO_UNDEFINED = (str) => str === "" ? void 0 : str;
+  var EMPTY_STR_TO_UNDEFINED2 = (str) => str === "" ? void 0 : str;
   function parseRange(notation) {
     const rangeNotation = /^(\d*)(\W?-(\W?\d*))?$/g;
-    const [, start, , end] = rangeNotation.exec(notation.trim()).map(EMPTY_STR_TO_UNDEFINED);
+    const [, start, , end] = rangeNotation.exec(notation.trim()).map(EMPTY_STR_TO_UNDEFINED2);
     if (start && !end) {
       return [parseInt(start)];
     } else if (start && end) {
@@ -701,7 +718,7 @@
     get die() {
       const maybeDieNotation = this.table.rows[0].cells[0].textContent;
       if (maybeDieNotation)
-        return new Die(maybeDieNotation);
+        return Die.from(maybeDieNotation);
       return void 0;
     }
     ranges(column) {
