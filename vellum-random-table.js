@@ -633,7 +633,7 @@
       this.EMPTY_STR_TO_UNDEFINED = (str) => str === "" ? void 0 : str;
     }
     constructor(notation) {
-      this.notation = notation;
+      this.notation = notation.trim();
       const diceNotation = /^(\d*)d(\d+)(\s*(\+|-)\s*(\d+))?$/g;
       const [, number = "1", dice = "1", , plusMinus = "+", modifier = "0"] = diceNotation.exec(this.notation).map(_Die.EMPTY_STR_TO_UNDEFINED);
       this.number = parseInt(number);
@@ -645,7 +645,13 @@
         { length: this.number },
         () => Math.floor(Math.random() * this.dice + 1)
       );
-      return rolls.reduce((a3, b3) => a3 + b3, 0) + this.modifier;
+      const result = rolls.reduce((a3, b3) => a3 + b3, 0) + this.modifier;
+      const rollsWithModifier = this.modifier !== 0 ? [...rolls, this.modifier] : rolls;
+      const roll = {
+        result,
+        rolls: rollsWithModifier.join(" + ")
+      };
+      return roll;
     }
     toString() {
       return this.notation;
@@ -656,7 +662,7 @@
   var EMPTY_STR_TO_UNDEFINED = (str) => str === "" ? void 0 : str;
   function parseRange(notation) {
     const rangeNotation = /^(\d*)(\W?-(\W?\d*))?$/g;
-    const [, start, , end] = rangeNotation.exec(notation).map(EMPTY_STR_TO_UNDEFINED);
+    const [, start, , end] = rangeNotation.exec(notation.trim()).map(EMPTY_STR_TO_UNDEFINED);
     if (start && !end) {
       return [parseInt(start)];
     } else if (start && end) {
@@ -699,7 +705,7 @@
       return void 0;
     }
     ranges(column) {
-      return this.selection(column).map((content) => content.trim()).map((cell) => parseRange(cell)).filter((item) => !!item);
+      return this.selection(column).map((cell) => parseRange(cell)).filter((item) => !!item);
     }
     selection(column) {
       return Array.from(this.table.tBodies).flatMap((tbody) => Array.from(tbody.rows)).map((row) => row.cells[column]).map((cell) => cell.textContent).map((content) => content ? content : "").map((content) => content.trim());
@@ -726,10 +732,10 @@
         const selection = this.selection(1);
         const roll = this.die?.roll();
         if (roll) {
-          const index = ranges.findIndex((range) => range.includes(roll));
+          const index = ranges.findIndex((range) => range.includes(roll.result));
           const result = selection[index];
           if (!this.hideroll)
-            this.display(`${result} (${roll})`);
+            this.display(`${result} (${roll.result} = ${roll.rolls})`);
           else
             this.display(result);
         }
