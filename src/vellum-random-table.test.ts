@@ -1,15 +1,11 @@
-import { test, expect, Page, Locator } from '@playwright/test'
-import { promises as fs } from 'fs'
-import * as cheerio from 'cheerio'
-import { randomUUID } from 'crypto'
+import { test, expect } from '@playwright/test'
 
 test('displays table', async ({ page }) => {
-  const fixture = await mountOn(
-    page,
-    `
-    <vellum-random-table>
+  await page.addScriptTag({ path: './vellum-random-table.js' })
+  await page.setContent(`
+    <vellum-random-table select="#results">
       <table>
-        <caption>Random Encounters</caption>
+      <caption>Table</caption>
         <thead>
           <tr>
             <th>Encounter</th>
@@ -25,40 +21,39 @@ test('displays table', async ({ page }) => {
         </tbody>
       </table>
       <button type="submit">Roll</button>
+      <input id="results" type="text"/>
     </vellum-random-table>
-  `,
-  )
+  `)
 
-  await expect(
-    fixture.getByRole('table', { name: 'Random Encounters' }),
-  ).toBeVisible()
+  await expect(page.getByRole('table', { name: 'Table' })).toBeVisible()
 })
 
 test('displays empty table', async ({ page }) => {
-  const fixture = await mountOn(
-    page,
-    `
-    <vellum-random-table>
+  await page.addScriptTag({ path: './vellum-random-table.js' })
+  await page.setContent(`
+    <vellum-random-table select="#results">
       <table>
-        <caption>Random Encounters</caption>
+        <caption>Table</caption>
       </table>
       <button type="submit">Roll</button>
+      <input id="results" type="text"/>
     </vellum-random-table>
-  `,
-  )
+  `)
 
-  await expect(
-    fixture.getByRole('table', { name: 'Random Encounters' }),
-  ).toBeVisible()
+  await expect(page.getByRole('table', { name: 'Table' })).toBeVisible()
 })
 
 test('rolls on random table', async ({ page }) => {
-  const fixture = await mountOn(
-    page,
-    `
-    <vellum-random-table>
+  await page.addScriptTag({ path: './vellum-random-table.js' })
+
+  page.on('pageerror', (exception) => {
+    console.log(`Uncaught exception: "${exception}"`)
+    console.log(exception.stack)
+  })
+
+  await page.setContent(`
+    <vellum-random-table select="#results" hideroll>
       <table>
-        <caption>Random Encounters</caption>
         <thead>
           <tr>
             <th>Encounter</th>
@@ -66,39 +61,26 @@ test('rolls on random table', async ({ page }) => {
         </thead>
         <tbody>
           <tr>
-            <td>1 wolf</td>
+            <td>A</td>
           </tr>
           <tr>
-            <td>2 goblins</td>
+            <td>B</td>
           </tr>
         </tbody>
       </table>
       <button>Roll</button>
+      <label for="results">Result:</label>
+      <input id="results" type="text"/>
     </vellum-random-table>
-  `,
-  )
-
-  await fixture.getByRole('button', { name: 'Roll' }).click()
-  const result = await fixture
-    .getByRole('alert', { name: 'Roll Result' })
-    .textContent()
-
-  expect(['1 wolf', '2 goblins']).toContain(result?.trim())
-})
-
-async function mountOn(page: Page, fragment: string): Promise<Locator> {
-  const code = await fs.readFile('./vellum-random-table.js')
-  const html = cheerio.load(fragment)('vellum-random-table')
-  const uuid = randomUUID()
-  const component = html.attr('data-testid', uuid)
-
-  await page.setContent(`
-      <script>
-        ${code.toString()}
-      </script>
-
-      ${component.toString()}
   `)
 
-  return await page.getByTestId(uuid)
-}
+  await page.getByRole('button', { name: 'Roll' }).click()
+
+  await page.screenshot({ path: './screenshot.png' })
+
+  const result = await page.getByLabel('Result').textContent()
+
+  const html = await page.content()
+  console.log(html)
+  expect(['A', 'B']).toContain(result?.trim())
+})
