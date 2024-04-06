@@ -32,13 +32,8 @@
     "experimentalDecorators": true,
     "sourceMap": true,
     "outDir": "./",
-    "types": [
-      "node"
-    ],
-    "lib": [
-      "ES6",
-      "DOM"
-    ],
+    "types": ["node"],
+    "lib": ["ES6", "DOM"],
     "plugins": [
       {
         "name": "ts-lit-plugin",
@@ -46,11 +41,6 @@
       }
     ]
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.test.ts"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "**/*.test.ts"]
 }
