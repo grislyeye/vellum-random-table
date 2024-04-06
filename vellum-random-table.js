@@ -754,7 +754,7 @@
           const result = selection[index];
           if (!this.hideroll)
             this.display(
-              `${result} (${roll.result}${this.hidecalc ? "" : `= ${roll.rolls}`})`
+              `${result} (${roll.result}${this.hidecalc ? "" : ` = ${roll.rolls}`})`
             );
           else
             this.display(result);
