@@ -50,7 +50,7 @@ export class VellumRandomTable extends LitElement {
 
   private get die(): Die | undefined {
     const maybeDieNotation = this.table.rows[0].cells[0].textContent
-    if (maybeDieNotation) return new Die(maybeDieNotation)
+    if (maybeDieNotation) return Die.from(maybeDieNotation)
     return undefined
   }
 

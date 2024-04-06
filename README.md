@@ -73,6 +73,40 @@ Two-column table where items are selected by a dice roll:
 </vellum-random-table>
 ```
 
+Two-column table where items are selected by a d66:
+
+```html
+<vellum-random-table select="#result">
+  <caption>
+    Random Encounters
+  </caption>
+  <table>
+    <thead>
+      <tr>
+        <th>d66</th>
+        <th>Encounter</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>11-46</td>
+        <td>1 wolf</td>
+      </tr>
+      <tr>
+        <td>51-65</td>
+        <td>2 goblins</td>
+      </tr>
+      <tr>
+        <td>66</td>
+        <td>dragon</td>
+      </tr>
+    </tbody>
+  </table>
+  <button>Roll</button>
+  <input id="result" type="text" />
+</vellum-random-table>
+```
+
 ## Installation
 
 Install via [npm](https://www.npmjs.com/package/@daviddarnes/component-name): `npm i vellum-random-table -S`.

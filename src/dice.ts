@@ -3,31 +3,56 @@ export interface Roll {
   rolls: string
 }
 
-export class Die {
-  private static EMPTY_STR_TO_UNDEFINED = (str: string) =>
-    str === '' ? undefined : str
+const EMPTY_STR_TO_UNDEFINED = (str: string) => (str === '' ? undefined : str)
 
-  private notation: string
-  readonly number: number
-  readonly dice: number
-  readonly modifier: number
+function rollDice(sides: number) {
+  return Math.floor(Math.random() * sides + 1)
+}
+
+export abstract class Die {
+  abstract roll(): Roll
+
+  static from(notation: string): Die {
+    switch (notation) {
+      case 'd66':
+        return D66
+      default:
+        return new StandardDie(notation)
+    }
+  }
+}
+
+const D66 = new (class extends Die {
+  override roll(): Roll {
+    const rolls = [rollDice(6), rollDice(6)]
+    return {
+      result: parseInt(`${rolls[0]}${rolls[1]}`),
+      rolls: `${rolls[0]} + ${rolls[1]}`,
+    }
+  }
+})()
+
+class StandardDie extends Die {
+  private number: number
+  private sides: number
+  private modifier: number
 
   constructor(notation: string) {
-    this.notation = notation.trim()
+    super()
 
     const diceNotation: RegExp = /^(\d*)d(\d+)(\s*(\+|-)\s*(\d+))?$/g
 
     const [, number = '1', dice = '1', , plusMinus = '+', modifier = '0'] =
-      diceNotation.exec(this.notation)!.map(Die.EMPTY_STR_TO_UNDEFINED)
+      diceNotation.exec(notation)!.map(EMPTY_STR_TO_UNDEFINED)
 
     this.number = parseInt(number)
-    this.dice = parseInt(dice)
+    this.sides = parseInt(dice)
     this.modifier = parseInt(plusMinus + modifier)
   }
 
-  roll(): Roll {
+  override roll(): Roll {
     const rolls = Array.from({ length: this.number }, () =>
-      Math.floor(Math.random() * this.dice + 1),
+      rollDice(this.sides),
     )
 
     const result = rolls.reduce((a, b) => a + b, 0) + this.modifier
@@ -40,9 +65,5 @@ export class Die {
     }
 
     return roll
-  }
-
-  toString(): string {
-    return this.notation
   }
 }
