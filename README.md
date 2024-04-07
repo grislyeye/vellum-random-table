@@ -1,4 +1,4 @@
-# `<vellum-dice>` [![Lint](https://github.com/grislyeye/roll/actions/workflows/lint-and-test.yml/badge.svg)](https://github.com/grislyeye/vellum-dice/actions/workflows/lint-and-test.yml)
+# `<vellum-dice>` [![Lint](https://github.com/grislyeye/vellum-dice/actions/workflows/lint.yml/badge.svg)](https://github.com/grislyeye/vellum-dice/actions/workflows/lint.yml)
 
 Web component and interactive dice roller. Inspired by [javalent/dice-roller](https://github.com/javalent/dice-roller).
 
