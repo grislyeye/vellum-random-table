@@ -767,7 +767,9 @@
         target.value = `${result.textContent}${details ? ` (${details})` : ""}`;
       } else if (target) {
         target.innerHTML = "";
-        Array.from(result.children).forEach((c4) => target.appendChild(c4.cloneNode(true)));
+        Array.from(result.children).forEach(
+          (c4) => target.appendChild(c4.cloneNode(true))
+        );
         if (details)
           target.appendChild(document.createTextNode(` (${details})`));
       }
