@@ -1,112 +1,25 @@
-# `<vellum-random-table>` [![Lint](https://github.com/grislyeye/vellum-random-table/actions/workflows/lint-and-test.yml/badge.svg)](https://github.com/grislyeye/vellum-random-table/actions/workflows/lint-and-test.yml)
+# `<vellum-dice>` [![Lint](https://github.com/grislyeye/roll/actions/workflows/lint-and-test.yml/badge.svg)](https://github.com/grislyeye/vellum-dice/actions/workflows/lint-and-test.yml)
 
-Web component for interactive random tables.
+Web component and interactive dice roller. Inspired by [javalent/dice-roller](https://github.com/javalent/dice-roller).
 
-**[Demo](https://grislyeye.github.io/vellum-random-table/)**
+**[Demo](https://grislyeye.github.io/vellum-dice/)**
 
-| Attribute  | Description                                                                         | Default |
-| ---------- | ----------------------------------------------------------------------------------- | ------- |
-| `select`   | The container/input to display roll results, identified by a CSS selector.          |         |
-| `preroll`  | Loads table with pre-rolled result.                                                 | `false` |
-| `hideroll` | Hides rolls and just displays the results.                                          | `false` |
-| `hidecalc` | Shows rolls but hides calculations (i.e. `1 + 4`). Ignored when `hideroll == true`. | `false` |
+| Attribute | Description                         | Default |
+| --------- | ----------------------------------- | ------- |
+| `preroll` | Loads table with pre-rolled result. | `false` |
 
 ### Examples
 
-Simple, one-column table (elements are selected at random with equal weight):
-
-```html
-<vellum-random-table select="#result" preroll hideroll>
-  <table>
-    <thead>
-      <tr>
-        <th>Encounter</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1 wolf</td>
-      </tr>
-      <tr>
-        <td>2 goblins</td>
-      </tr>
-    </tbody>
-  </table>
-  <button>Roll</button>
-  <input id="result" type="text" />
-</vellum-random-table>
-```
-
-Two-column table where items are selected by a dice roll:
-
-```html
-<vellum-random-table select="#result">
-  <table>
-    <thead>
-      <tr>
-        <th>2d4+1</th>
-        <th>Encounter</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>3-5</td>
-        <td>1 wolf</td>
-      </tr>
-      <tr>
-        <td>6-8</td>
-        <td>2 goblins</td>
-      </tr>
-      <tr>
-        <td>9</td>
-        <td>dragon</td>
-      </tr>
-    </tbody>
-  </table>
-  <button>Roll</button>
-  <input id="result" type="text" />
-</vellum-random-table>
-```
-
-Two-column table where items are selected by a d66:
-
-```html
-<vellum-random-table select="#result" hidecalc>
-  <table>
-    <thead>
-      <tr>
-        <th>d66</th>
-        <th>Encounter</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>11-46</td>
-        <td>1 wolf</td>
-      </tr>
-      <tr>
-        <td>51-65</td>
-        <td>2 goblins</td>
-      </tr>
-      <tr>
-        <td>66</td>
-        <td>dragon</td>
-      </tr>
-    </tbody>
-  </table>
-  <button>Roll</button>
-  <input id="result" type="text" />
-</vellum-random-table>
-```
+Add the following wherever you need a roll: `<vellum-dice>2d6+3</vellum-dice>`.
 
 ## Installation
 
-Install via [npm](https://www.npmjs.com/package/@daviddarnes/component-name): `npm i vellum-random-table -S`.
+Install via [npm](https://www.npmjs.com/package/@daviddarnes/component-name): `npm i vellum-dice -S`.
 
 ### Usage
 
 Include the `<script>` in your project:
 
 ```html
-<script type="module" src="vellum-random-table.js"></script>
+<script type="module" src="vellum-dice.js"></script>
 ```

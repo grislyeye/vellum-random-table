@@ -4,6 +4,6 @@
 coverage
 *.log
 
-vellum-random-table.js*
+vellum-dice.js*
 custom-elements.json
 docs
