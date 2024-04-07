@@ -23,7 +23,7 @@ export class VellumDice extends LitElement {
 
   roll(): Roll | undefined {
     if (this.die) {
-      const roll = Die.from(this.die).roll()
+      const roll = Die.from(this.die.trim()).roll()
       return roll
     }
     return
