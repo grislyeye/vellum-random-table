@@ -19,10 +19,11 @@
     "lint": "eslint src/ --ext .js,.jsx,.ts,.tsx && npx prettier . --check",
     "lint:format": "npx prettier . --write",
     "clean": "rm -rf docs vellum-random-table.js vellum-random-table.js.map",
-    "build": "npm run clean && npm run build:prod",
+    "build": "npm run clean && npm run build:prod && npm run build:analyze",
     "build:prod": "esbuild src/vellum-random-table.ts --bundle --minify --sourcemap=external --outfile=vellum-random-table.js",
     "build:dev": "esbuild src/vellum-random-table.ts --bundle --outfile=vellum-random-table.js",
     "build:watch": "esbuild src/vellum-random-table.ts --bundle --watch --outfile=vellum-random-table.js --servedir=./",
+    "build:analyze": "cem analyze --litelement",
     "build:docs": "npm run build:dev && mkdir docs && cp vellum-random-table.js index.html docs/",
     "prepublishOnly": "npm run build"
   },
