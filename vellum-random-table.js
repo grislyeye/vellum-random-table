@@ -720,7 +720,7 @@
       const maybeDieNotation = this.table.rows[0].cells[0].textContent;
       if (maybeDieNotation)
         return Die.from(maybeDieNotation);
-      return void 0;
+      return;
     }
     ranges(column) {
       return this.selection(column).map((cell) => cell.textContent).filter((content) => !!content).map((cell) => parseRange(cell)).filter((item) => !!item);
@@ -731,7 +731,7 @@
     get resultTarget() {
       if (this.select)
         return this.querySelector(this.select);
-      return void 0;
+      return;
     }
     roll() {
       const target = this.resultTarget;
@@ -763,13 +763,11 @@
     }
     display(result, details = void 0) {
       const target = this.resultTarget;
-      if (target && target instanceof HTMLInputElement && result.textContent) {
+      if (target && target instanceof HTMLInputElement) {
         target.value = `${result.textContent}${details ? ` (${details})` : ""}`;
       } else if (target) {
         target.innerHTML = "";
-        Array.from(result.children).forEach((c4) => {
-          target.appendChild(c4.cloneNode(true));
-        });
+        Array.from(result.children).forEach((c4) => target.appendChild(c4.cloneNode(true)));
         if (details)
           target.appendChild(document.createTextNode(` (${details})`));
       }
