@@ -23,6 +23,7 @@
     "build:prod": "esbuild src/vellum-dice.ts --bundle --minify --sourcemap=external --outfile=vellum-dice.js",
     "build:dev": "esbuild src/vellum-dice.ts --bundle --outfile=vellum-dice.js",
     "build:watch": "esbuild src/vellum-dice.ts --bundle --watch --outfile=vellum-dice.js --servedir=./",
+    "build:analyze": "cem analyze --litelement",
     "build:docs": "npm run build:dev && mkdir docs && cp vellum-dice.js index.html docs/",
     "prepublishOnly": "npm run build"
   },
