@@ -4,10 +4,6 @@ Web component and interactive dice roller. Inspired by [javalent/dice-roller](ht
 
 **[Demo](https://grislyeye.github.io/vellum-dice/)**
 
-| Attribute | Description                         | Default |
-| --------- | ----------------------------------- | ------- |
-| `preroll` | Loads table with pre-rolled result. | `false` |
-
 ### Examples
 
 Add the following wherever you need a roll: `<vellum-dice>2d6+3</vellum-dice>`.
