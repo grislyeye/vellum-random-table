@@ -5,7 +5,7 @@ export interface Roll {
 
 const EMPTY_STR_TO_UNDEFINED = (str: string) => (str === '' ? undefined : str)
 
-function rollDice(sides: number) {
+function rollDice(sides: number): number {
   return Math.floor(Math.random() * sides + 1)
 }
 

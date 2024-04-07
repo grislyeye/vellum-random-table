@@ -54,7 +54,7 @@ export class VellumRandomTable extends LitElement {
   private get die(): Die | undefined {
     const maybeDieNotation = this.table.rows[0].cells[0].textContent
     if (maybeDieNotation) return Die.from(maybeDieNotation)
-    return undefined
+    return
   }
 
   private ranges(column: number): Range[] {
@@ -73,7 +73,7 @@ export class VellumRandomTable extends LitElement {
 
   private get resultTarget(): HTMLElement | undefined {
     if (this.select) return this.querySelector(this.select) as HTMLElement
-    return undefined
+    return
   }
 
   roll(): void {
@@ -114,14 +114,14 @@ export class VellumRandomTable extends LitElement {
   ): void {
     const target = this.resultTarget
 
-    if (target && target instanceof HTMLInputElement && result.textContent) {
+    if (target && target instanceof HTMLInputElement) {
       target.value = `${result.textContent}${details ? ` (${details})` : ''}`
     } else if (target) {
       target.innerHTML = ''
 
-      Array.from(result.children).forEach((c) => {
-        target.appendChild(c.cloneNode(true))
-      })
+      Array.from(result.children).forEach((c) =>
+        target.appendChild(c.cloneNode(true)),
+      )
 
       if (details) target.appendChild(document.createTextNode(` (${details})`))
     }
