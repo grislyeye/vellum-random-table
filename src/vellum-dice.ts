@@ -7,7 +7,7 @@ async function* rollAnimation(die: Die, count: number) {
   while (count > 0) {
     yield die.roll().result
     count--
-    await new Promise((r) => setTimeout(r, 30))
+    await new Promise((r) => setTimeout(r, 50))
   }
 }
 
