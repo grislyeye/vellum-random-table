@@ -17,8 +17,14 @@ export class VellumDice extends LitElement {
     :host {
       display: inline;
       cursor: pointer;
-      text-decoration: underline;
       font-weight: bold;
+
+      border-bottom: 1px solid black;
+    }
+
+    .result {
+      display: inline-block;
+      min-width: 2ch;
     }
   `
 
@@ -32,8 +38,8 @@ export class VellumDice extends LitElement {
 
   render() {
     return html`
-      <span @click="${this.reroll}">
-        ${this.die ? asyncReplace(rollAnimation(this.die, 4)) : ''} (<slot></slot>&#9860;)
+      <span class="roll" @click="${this.reroll}">
+        <span class="result">${this.die ? asyncReplace(rollAnimation(this.die, 4)) : ''}</span> (<slot></slot>&#9860;)
       </span>
     `
   }
