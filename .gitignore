@@ -4,6 +4,9 @@
 coverage
 *.log
 
+dice.d*
+dice.js*
+vellum-dice.d*
 vellum-dice.js*
 custom-elements.json
 docs

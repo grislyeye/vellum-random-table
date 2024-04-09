@@ -1,6 +1,15 @@
 import { LitElement, css, html } from 'lit'
+import { asyncReplace } from 'lit-html/directives/async-replace.js'
 import { customElement } from 'lit/decorators.js'
-import { Die, Roll } from './dice'
+import { Die } from './dice'
+
+async function* rollAnimation(die: Die, count: number) {
+  while (count > 0) {
+    yield die.roll().result
+    count--
+    await new Promise((r) => setTimeout(r, 50))
+  }
+}
 
 @customElement('vellum-dice')
 export class VellumDice extends LitElement {
@@ -13,27 +22,18 @@ export class VellumDice extends LitElement {
     }
   `
 
-  get die(): string | null {
-    return this.textContent
+  get die(): Die | undefined {
+    return this.textContent ? Die.from(this.textContent.trim()) : undefined
   }
 
   private reroll() {
     this.requestUpdate()
   }
 
-  roll(): Roll | undefined {
-    if (this.die) {
-      const roll = Die.from(this.die.trim()).roll()
-      return roll
-    }
-    return
-  }
-
   render() {
-    const roll = this.roll()
     return html`
       <span @click="${this.reroll}">
-        ${roll ? roll.result : ''} (<slot></slot>&#9860;)
+        ${this.die ? asyncReplace(rollAnimation(this.die, 4)) : ''} (<slot></slot>&#9860;)
       </span>
     `
   }

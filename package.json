@@ -1,6 +1,6 @@
 {
   "name": "vellum-dice",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Web component and interactive dice roller. ",
   "author": "Ric Wood <ric@grislyeye.com>",
   "repository": "https://github.com/grislyeye/vellum-dice",
@@ -20,9 +20,9 @@
     "lint:format": "npx prettier . --write",
     "clean": "rm -rf docs vellum-dice.js vellum-dice.js.map",
     "build": "npm run clean && npm run build:prod",
-    "build:prod": "esbuild src/vellum-dice.ts --bundle --minify --sourcemap=external --outfile=vellum-dice.js",
-    "build:dev": "esbuild src/vellum-dice.ts --bundle --outfile=vellum-dice.js",
-    "build:watch": "esbuild src/vellum-dice.ts --bundle --watch --outfile=vellum-dice.js --servedir=./",
+    "build:prod": "tsc && esbuild src/vellum-dice.ts --bundle --minify --sourcemap=external --outfile=vellum-dice.js",
+    "build:dev": "tsc && esbuild src/vellum-dice.ts --bundle --outfile=vellum-dice.js",
+    "build:watch": "tsc && esbuild src/vellum-dice.ts --bundle --watch --outfile=vellum-dice.js --servedir=./",
     "build:analyze": "cem analyze --litelement",
     "build:docs": "npm run build:dev && mkdir docs && cp vellum-dice.js index.html docs/",
     "prepublishOnly": "npm run build"
