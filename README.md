@@ -101,11 +101,24 @@ Two-column table where items are selected by a d66:
 
 ## Installation
 
-Install via [npm](https://www.npmjs.com/package/@daviddarnes/component-name): `npm i vellum-random-table -S`.
+You have a few options (choose one of these):
+
+1. Use the script directly via a 3rd party CDN.
+2. Install via [npm](https://www.npmjs.com/package/@daviddarnes/mastodon-post): `npm install vellum-random0table`.
+3. [Download the source manually from GitHub](https://github.com/grislyeye/vellum-random-table/tags) into your project.
 
 ### Usage
 
-Include the `<script>` in your project:
+Include the `<script>` in your markup:
+
+```html
+<script
+  type="module"
+  src="https://www.unpkg.com/vellum-random-table@1.1.0/vellum-random-table.js"
+></script>
+```
+
+If you host the script as part of your project:
 
 ```html
 <script type="module" src="vellum-random-table.js"></script>
