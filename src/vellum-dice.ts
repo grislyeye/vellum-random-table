@@ -1,13 +1,13 @@
 import { LitElement, css, html } from 'lit'
+import { customElement, property } from 'lit/decorators.js'
 import { asyncReplace } from 'lit-html/directives/async-replace.js'
-import { customElement } from 'lit/decorators.js'
 import { Die } from './dice'
 
 async function* rollAnimation(die: Die, count: number) {
   while (count > 0) {
     yield die.roll().result
     count--
-    await new Promise((r) => setTimeout(r, 50))
+    await new Promise((r) => setTimeout(r, 30))
   }
 }
 
@@ -22,6 +22,9 @@ export class VellumDice extends LitElement {
     }
   `
 
+  @property({ type: Boolean })
+  animation: boolean = false
+
   get die(): Die | undefined {
     return this.textContent ? Die.from(this.textContent.trim()) : undefined
   }
@@ -30,10 +33,19 @@ export class VellumDice extends LitElement {
     this.requestUpdate()
   }
 
+  private roll() {
+    if (this.die) {
+      return this.animation
+        ? asyncReplace(rollAnimation(this.die, 6))
+        : this.die.roll().result
+    }
+    return
+  }
+
   render() {
     return html`
       <span @click="${this.reroll}">
-        ${this.die ? asyncReplace(rollAnimation(this.die, 4)) : ''} (<slot></slot>&#9860;)
+        ${this.roll()} (<slot></slot>&#9860;)
       </span>
     `
   }
