@@ -7,3 +7,7 @@ coverage
 vellum-random-table.js*
 custom-elements.json
 docs
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

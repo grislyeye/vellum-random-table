@@ -14,11 +14,11 @@
   <body>
     <h2>One-column random table</h2>
 
-    <vellum-random-table select="#result" preroll hideroll>
-      <caption>
-        Random Encounters
-      </caption>
+    <vellum-random-table select="#results" hideroll>
       <table>
+        <caption>
+          Random Encounters
+        </caption>
         <thead>
           <tr>
             <th>Encounter</th>
@@ -34,7 +34,8 @@
         </tbody>
       </table>
       <button>Roll</button>
-      <input id="result" type="text" />
+      <label for="results">Result:</label>
+      <input id="results" type="text" />
     </vellum-random-table>
 
     <h2>Two-column random table with dice</h2>
