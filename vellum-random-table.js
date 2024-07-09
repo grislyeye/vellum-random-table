@@ -7,8 +7,7 @@
     for (var i4 = decorators.length - 1, decorator; i4 >= 0; i4--)
       if (decorator = decorators[i4])
         result = (kind ? decorator(target, key, result) : decorator(result)) || result;
-    if (kind && result)
-      __defProp(target, key, result);
+    if (kind && result) __defProp(target, key, result);
     return result;
   };
 
@@ -19,8 +18,7 @@
   var o = /* @__PURE__ */ new WeakMap();
   var n = class {
     constructor(t4, e5, o5) {
-      if (this._$cssResult$ = true, o5 !== s)
-        throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
+      if (this._$cssResult$ = true, o5 !== s) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
       this.cssText = t4, this.t = e5;
     }
     get styleSheet() {
@@ -39,27 +37,22 @@
   var r = (t4) => new n("string" == typeof t4 ? t4 : t4 + "", void 0, s);
   var i = (t4, ...e5) => {
     const o5 = 1 === t4.length ? t4[0] : e5.reduce((e6, s4, o6) => e6 + ((t5) => {
-      if (true === t5._$cssResult$)
-        return t5.cssText;
-      if ("number" == typeof t5)
-        return t5;
+      if (true === t5._$cssResult$) return t5.cssText;
+      if ("number" == typeof t5) return t5;
       throw Error("Value passed to 'css' function must be a 'css' function result: " + t5 + ". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.");
     })(s4) + t4[o6 + 1], t4[0]);
     return new n(o5, t4, s);
   };
   var S = (s4, o5) => {
-    if (e)
-      s4.adoptedStyleSheets = o5.map((t4) => t4 instanceof CSSStyleSheet ? t4 : t4.styleSheet);
-    else
-      for (const e5 of o5) {
-        const o6 = document.createElement("style"), n5 = t.litNonce;
-        void 0 !== n5 && o6.setAttribute("nonce", n5), o6.textContent = e5.cssText, s4.appendChild(o6);
-      }
+    if (e) s4.adoptedStyleSheets = o5.map((t4) => t4 instanceof CSSStyleSheet ? t4 : t4.styleSheet);
+    else for (const e5 of o5) {
+      const o6 = document.createElement("style"), n5 = t.litNonce;
+      void 0 !== n5 && o6.setAttribute("nonce", n5), o6.textContent = e5.cssText, s4.appendChild(o6);
+    }
   };
   var c = e ? (t4) => t4 : (t4) => t4 instanceof CSSStyleSheet ? ((t5) => {
     let e5 = "";
-    for (const s4 of t5.cssRules)
-      e5 += s4.cssText;
+    for (const s4 of t5.cssRules) e5 += s4.cssText;
     return r(e5);
   })(t4) : t4;
 
@@ -132,25 +125,20 @@
       return this.elementProperties.get(t4) ?? y;
     }
     static _$Ei() {
-      if (this.hasOwnProperty(d("elementProperties")))
-        return;
+      if (this.hasOwnProperty(d("elementProperties"))) return;
       const t4 = n2(this);
       t4.finalize(), void 0 !== t4.l && (this.l = [...t4.l]), this.elementProperties = new Map(t4.elementProperties);
     }
     static finalize() {
-      if (this.hasOwnProperty(d("finalized")))
-        return;
+      if (this.hasOwnProperty(d("finalized"))) return;
       if (this.finalized = true, this._$Ei(), this.hasOwnProperty(d("properties"))) {
         const t5 = this.properties, s4 = [...h(t5), ...o2(t5)];
-        for (const i4 of s4)
-          this.createProperty(i4, t5[i4]);
+        for (const i4 of s4) this.createProperty(i4, t5[i4]);
       }
       const t4 = this[Symbol.metadata];
       if (null !== t4) {
         const s4 = litPropertyMetadata.get(t4);
-        if (void 0 !== s4)
-          for (const [t5, i4] of s4)
-            this.elementProperties.set(t5, i4);
+        if (void 0 !== s4) for (const [t5, i4] of s4) this.elementProperties.set(t5, i4);
       }
       this._$Eh = /* @__PURE__ */ new Map();
       for (const [t5, s4] of this.elementProperties) {
@@ -163,10 +151,8 @@
       const i4 = [];
       if (Array.isArray(s4)) {
         const e5 = new Set(s4.flat(1 / 0).reverse());
-        for (const s5 of e5)
-          i4.unshift(c(s5));
-      } else
-        void 0 !== s4 && i4.push(c(s4));
+        for (const s5 of e5) i4.unshift(c(s5));
+      } else void 0 !== s4 && i4.push(c(s4));
       return i4;
     }
     static _$Eu(t4, s4) {
@@ -187,8 +173,7 @@
     }
     _$E_() {
       const t4 = /* @__PURE__ */ new Map(), s4 = this.constructor.elementProperties;
-      for (const i4 of s4.keys())
-        this.hasOwnProperty(i4) && (t4.set(i4, this[i4]), delete this[i4]);
+      for (const i4 of s4.keys()) this.hasOwnProperty(i4) && (t4.set(i4, this[i4]), delete this[i4]);
       t4.size > 0 && (this._$Ep = t4);
     }
     createRenderRoot() {
@@ -222,8 +207,7 @@
     }
     requestUpdate(t4, s4, i4) {
       if (void 0 !== t4) {
-        if (i4 ??= this.constructor.getPropertyOptions(t4), !(i4.hasChanged ?? f)(this[t4], s4))
-          return;
+        if (i4 ??= this.constructor.getPropertyOptions(t4), !(i4.hasChanged ?? f)(this[t4], s4)) return;
         this.P(t4, s4, i4);
       }
       false === this.isUpdatePending && (this._$ES = this._$ET());
@@ -245,18 +229,14 @@
       return this.performUpdate();
     }
     performUpdate() {
-      if (!this.isUpdatePending)
-        return;
+      if (!this.isUpdatePending) return;
       if (!this.hasUpdated) {
         if (this.renderRoot ??= this.createRenderRoot(), this._$Ep) {
-          for (const [t6, s5] of this._$Ep)
-            this[t6] = s5;
+          for (const [t6, s5] of this._$Ep) this[t6] = s5;
           this._$Ep = void 0;
         }
         const t5 = this.constructor.elementProperties;
-        if (t5.size > 0)
-          for (const [s5, i4] of t5)
-            true !== i4.wrapped || this._$AL.has(s5) || void 0 === this[s5] || this.P(s5, this[s5], i4);
+        if (t5.size > 0) for (const [s5, i4] of t5) true !== i4.wrapped || this._$AL.has(s5) || void 0 === this[s5] || this.P(s5, this[s5], i4);
       }
       let t4 = false;
       const s4 = this._$AL;
@@ -324,8 +304,7 @@
   var A = /* @__PURE__ */ new WeakMap();
   var E = r3.createTreeWalker(r3, 129);
   function C(t4, i4) {
-    if (!Array.isArray(t4) || !t4.hasOwnProperty("raw"))
-      throw Error("invalid template strings array");
+    if (!Array.isArray(t4) || !t4.hasOwnProperty("raw")) throw Error("invalid template strings array");
     return void 0 !== s2 ? s2.createHTML(i4) : i4;
   }
   var P = (t4, i4) => {
@@ -334,8 +313,7 @@
     for (let i5 = 0; i5 < s4; i5++) {
       const s5 = t4[i5];
       let a3, u3, d3 = -1, y3 = 0;
-      for (; y3 < s5.length && (c4.lastIndex = y3, u3 = c4.exec(s5), null !== u3); )
-        y3 = c4.lastIndex, c4 === f2 ? "!--" === u3[1] ? c4 = v : void 0 !== u3[1] ? c4 = _ : void 0 !== u3[2] ? ($.test(u3[2]) && (r6 = RegExp("</" + u3[2], "g")), c4 = m) : void 0 !== u3[3] && (c4 = m) : c4 === m ? ">" === u3[0] ? (c4 = r6 ?? f2, d3 = -1) : void 0 === u3[1] ? d3 = -2 : (d3 = c4.lastIndex - u3[2].length, a3 = u3[1], c4 = void 0 === u3[3] ? m : '"' === u3[3] ? g : p2) : c4 === g || c4 === p2 ? c4 = m : c4 === v || c4 === _ ? c4 = f2 : (c4 = m, r6 = void 0);
+      for (; y3 < s5.length && (c4.lastIndex = y3, u3 = c4.exec(s5), null !== u3); ) y3 = c4.lastIndex, c4 === f2 ? "!--" === u3[1] ? c4 = v : void 0 !== u3[1] ? c4 = _ : void 0 !== u3[2] ? ($.test(u3[2]) && (r6 = RegExp("</" + u3[2], "g")), c4 = m) : void 0 !== u3[3] && (c4 = m) : c4 === m ? ">" === u3[0] ? (c4 = r6 ?? f2, d3 = -1) : void 0 === u3[1] ? d3 = -2 : (d3 = c4.lastIndex - u3[2].length, a3 = u3[1], c4 = void 0 === u3[3] ? m : '"' === u3[3] ? g : p2) : c4 === g || c4 === p2 ? c4 = m : c4 === v || c4 === _ ? c4 = f2 : (c4 = m, r6 = void 0);
       const x2 = c4 === m && t4[i5 + 1].startsWith("/>") ? " " : "";
       l3 += c4 === f2 ? s5 + n3 : d3 >= 0 ? (o5.push(a3), s5.slice(0, d3) + e3 + s5.slice(d3) + h2 + x2) : s5 + h2 + (-2 === d3 ? i5 : x2);
     }
@@ -353,30 +331,23 @@
       }
       for (; null !== (r6 = E.nextNode()) && d3.length < u3; ) {
         if (1 === r6.nodeType) {
-          if (r6.hasAttributes())
-            for (const t5 of r6.getAttributeNames())
-              if (t5.endsWith(e3)) {
-                const i4 = v2[a3++], s5 = r6.getAttribute(t5).split(h2), e5 = /([.?@])?(.*)/.exec(i4);
-                d3.push({ type: 1, index: c4, name: e5[2], strings: s5, ctor: "." === e5[1] ? k : "?" === e5[1] ? H : "@" === e5[1] ? I : R }), r6.removeAttribute(t5);
-              } else
-                t5.startsWith(h2) && (d3.push({ type: 6, index: c4 }), r6.removeAttribute(t5));
+          if (r6.hasAttributes()) for (const t5 of r6.getAttributeNames()) if (t5.endsWith(e3)) {
+            const i4 = v2[a3++], s5 = r6.getAttribute(t5).split(h2), e5 = /([.?@])?(.*)/.exec(i4);
+            d3.push({ type: 1, index: c4, name: e5[2], strings: s5, ctor: "." === e5[1] ? k : "?" === e5[1] ? H : "@" === e5[1] ? I : R }), r6.removeAttribute(t5);
+          } else t5.startsWith(h2) && (d3.push({ type: 6, index: c4 }), r6.removeAttribute(t5));
           if ($.test(r6.tagName)) {
             const t5 = r6.textContent.split(h2), s5 = t5.length - 1;
             if (s5 > 0) {
               r6.textContent = i3 ? i3.emptyScript : "";
-              for (let i4 = 0; i4 < s5; i4++)
-                r6.append(t5[i4], l2()), E.nextNode(), d3.push({ type: 2, index: ++c4 });
+              for (let i4 = 0; i4 < s5; i4++) r6.append(t5[i4], l2()), E.nextNode(), d3.push({ type: 2, index: ++c4 });
               r6.append(t5[s5], l2());
             }
           }
-        } else if (8 === r6.nodeType)
-          if (r6.data === o3)
-            d3.push({ type: 2, index: c4 });
-          else {
-            let t5 = -1;
-            for (; -1 !== (t5 = r6.data.indexOf(h2, t5 + 1)); )
-              d3.push({ type: 7, index: c4 }), t5 += h2.length - 1;
-          }
+        } else if (8 === r6.nodeType) if (r6.data === o3) d3.push({ type: 2, index: c4 });
+        else {
+          let t5 = -1;
+          for (; -1 !== (t5 = r6.data.indexOf(h2, t5 + 1)); ) d3.push({ type: 7, index: c4 }), t5 += h2.length - 1;
+        }
         c4++;
       }
     }
@@ -386,8 +357,7 @@
     }
   };
   function N(t4, i4, s4 = t4, e5) {
-    if (i4 === w)
-      return i4;
+    if (i4 === w) return i4;
     let h3 = void 0 !== e5 ? s4._$Co?.[e5] : s4._$Cl;
     const o5 = c3(i4) ? void 0 : i4._$litDirective$;
     return h3?.constructor !== o5 && (h3?._$AO?.(false), void 0 === o5 ? h3 = void 0 : (h3 = new o5(t4), h3._$AT(t4, s4, e5)), void 0 !== e5 ? (s4._$Co ??= [])[e5] = h3 : s4._$Cl = h3), void 0 !== h3 && (i4 = N(t4, h3._$AS(t4, i4.values), h3, e5)), i4;
@@ -417,8 +387,7 @@
     }
     p(t4) {
       let i4 = 0;
-      for (const s4 of this._$AV)
-        void 0 !== s4 && (void 0 !== s4.strings ? (s4._$AI(t4, s4, i4), i4 += s4.strings.length - 2) : s4._$AI(t4[i4])), i4++;
+      for (const s4 of this._$AV) void 0 !== s4 && (void 0 !== s4.strings ? (s4._$AI(t4, s4, i4), i4 += s4.strings.length - 2) : s4._$AI(t4[i4])), i4++;
     }
   };
   var M = class _M {
@@ -453,8 +422,7 @@
     }
     $(t4) {
       const { values: i4, _$litType$: s4 } = t4, e5 = "number" == typeof s4 ? this._$AC(t4) : (void 0 === s4.el && (s4.el = V.createElement(C(s4.h, s4.h[0]), this.options)), s4);
-      if (this._$AH?._$AD === e5)
-        this._$AH.p(i4);
+      if (this._$AH?._$AD === e5) this._$AH.p(i4);
       else {
         const t5 = new S2(e5, this), s5 = t5.u(this.options);
         t5.p(i4), this.T(s5), this._$AH = t5;
@@ -468,8 +436,7 @@
       a2(this._$AH) || (this._$AH = [], this._$AR());
       const i4 = this._$AH;
       let s4, e5 = 0;
-      for (const h3 of t4)
-        e5 === i4.length ? i4.push(s4 = new _M(this.S(l2()), this.S(l2()), this, this.options)) : s4 = i4[e5], s4._$AI(h3), e5++;
+      for (const h3 of t4) e5 === i4.length ? i4.push(s4 = new _M(this.S(l2()), this.S(l2()), this, this.options)) : s4 = i4[e5], s4._$AI(h3), e5++;
       e5 < i4.length && (this._$AR(s4 && s4._$AB.nextSibling, e5), i4.length = e5);
     }
     _$AR(t4 = this._$AA.nextSibling, i4) {
@@ -495,13 +462,11 @@
     _$AI(t4, i4 = this, s4, e5) {
       const h3 = this.strings;
       let o5 = false;
-      if (void 0 === h3)
-        t4 = N(this, t4, i4, 0), o5 = !c3(t4) || t4 !== this._$AH && t4 !== w, o5 && (this._$AH = t4);
+      if (void 0 === h3) t4 = N(this, t4, i4, 0), o5 = !c3(t4) || t4 !== this._$AH && t4 !== w, o5 && (this._$AH = t4);
       else {
         const e6 = t4;
         let n5, r6;
-        for (t4 = h3[0], n5 = 0; n5 < h3.length - 1; n5++)
-          r6 = N(this, e6[s4 + n5], i4, n5), r6 === w && (r6 = this._$AH[n5]), o5 ||= !c3(r6) || r6 !== this._$AH[n5], r6 === T ? t4 = T : t4 !== T && (t4 += (r6 ?? "") + h3[n5 + 1]), this._$AH[n5] = r6;
+        for (t4 = h3[0], n5 = 0; n5 < h3.length - 1; n5++) r6 = N(this, e6[s4 + n5], i4, n5), r6 === w && (r6 = this._$AH[n5]), o5 ||= !c3(r6) || r6 !== this._$AH[n5], r6 === T ? t4 = T : t4 !== T && (t4 += (r6 ?? "") + h3[n5 + 1]), this._$AH[n5] = r6;
       }
       o5 && !e5 && this.j(t4);
     }
@@ -530,8 +495,7 @@
       super(t4, i4, s4, e5, h3), this.type = 5;
     }
     _$AI(t4, i4 = this) {
-      if ((t4 = N(this, t4, i4, 0) ?? T) === w)
-        return;
+      if ((t4 = N(this, t4, i4, 0) ?? T) === w) return;
       const s4 = this._$AH, e5 = t4 === T && s4 !== T || t4.capture !== s4.capture || t4.once !== s4.once || t4.passive !== s4.passive, h3 = t4 !== T && (s4 === T || e5);
       e5 && this.element.removeEventListener(this.name, this, s4), h3 && this.element.addEventListener(this.name, this, t4), this._$AH = t4;
     }
@@ -700,8 +664,7 @@
     connectedCallback() {
       super.connectedCallback();
       this.button.addEventListener("click", () => this.roll());
-      if (this.preroll)
-        this.roll();
+      if (this.preroll) this.roll();
     }
     get mode() {
       if (this.table.rows[0].cells.length == 2) {
@@ -718,8 +681,7 @@
     }
     get die() {
       const maybeDieNotation = this.table.rows[0].cells[0].textContent;
-      if (maybeDieNotation)
-        return Die.from(maybeDieNotation);
+      if (maybeDieNotation) return Die.from(maybeDieNotation);
       return;
     }
     ranges(column) {
@@ -729,22 +691,18 @@
       return Array.from(this.table.tBodies).flatMap((tbody) => Array.from(tbody.rows)).map((row) => row.cells[column]);
     }
     get resultTarget() {
-      if (this.select)
-        return this.querySelector(this.select);
+      if (this.select) return this.querySelector(this.select);
       return;
     }
     roll() {
       const target = this.resultTarget;
-      if (!target)
-        return;
+      if (!target) return;
       if (this.mode == 0 /* FirstColumn */) {
         const selection = this.selection(0);
         const roll = Math.floor(Math.random() * selection.length);
         const result = selection[roll];
-        if (!this.hideroll)
-          this.display(result, `${roll + 1}`);
-        else
-          this.display(result);
+        if (!this.hideroll) this.display(result, `${roll + 1}`);
+        else this.display(result);
       } else if (this.mode == 1 /* TwoColumn */) {
         const ranges = this.ranges(0);
         const selection = this.selection(1);
@@ -770,8 +728,7 @@
         Array.from(result.children).forEach(
           (c4) => target.appendChild(c4.cloneNode(true))
         );
-        if (details)
-          target.appendChild(document.createTextNode(` (${details})`));
+        if (details) target.appendChild(document.createTextNode(` (${details})`));
       }
     }
     render() {
