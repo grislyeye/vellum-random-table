@@ -39,7 +39,7 @@
     "cheerio": "^1.0.0-rc.12",
     "eslint": "^8.57.0",
     "esbuild": "^0.23.0",
-    "prettier": "3.3.2",
+    "prettier": "3.3.3",
     "ts-lit-plugin": "^2.0.2",
     "typescript": "^5.5.3"
   }
