@@ -35,7 +35,7 @@
     "@typescript-eslint/eslint-plugin": "^7.5.0",
     "@typescript-eslint/parser": "^7.5.0",
     "@custom-elements-manifest/analyzer": "^0.10.3",
-    "@types/node": "^20.14.10",
+    "@types/node": "^22.4.1",
     "cheerio": "^1.0.0-rc.12",
     "eslint": "^8.57.0",
     "esbuild": "^0.23.0",
