@@ -4,8 +4,9 @@ import { Die } from './dice'
 import { Range, parseRange } from './range'
 
 enum TableMode {
-  FirstColumn,
+  OneColumn,
   TwoColumn,
+  MultiColumn,
 }
 
 @customElement('vellum-random-table')
@@ -36,10 +37,12 @@ export class VellumRandomTable extends LitElement {
   }
 
   get mode(): TableMode {
-    if (this.table.rows[0].cells.length == 2) {
+    if (this.table.rows[0].cells.length > 2) {
+      return TableMode.MultiColumn
+    } else if (this.table.rows[0].cells.length == 2) {
       return TableMode.TwoColumn
     } else {
-      return TableMode.FirstColumn
+      return TableMode.OneColumn
     }
   }
 
@@ -71,6 +74,12 @@ export class VellumRandomTable extends LitElement {
       .map((row) => row.cells[column])
   }
 
+  private resultColumns(): HTMLElement[][] {
+    return [...Array(this.table.rows[0].cells.length - 1).keys()]
+      .map((column) => column + 1)
+      .map((column) => this.selection(column))
+  }
+
   private get resultTarget(): HTMLElement | undefined {
     if (this.select) return this.querySelector(this.select) as HTMLElement
     return
@@ -80,14 +89,14 @@ export class VellumRandomTable extends LitElement {
     const target = this.resultTarget
     if (!target) return
 
-    if (this.mode == TableMode.FirstColumn) {
+    if (this.mode === TableMode.OneColumn) {
       const selection = this.selection(0)
       const roll = Math.floor(Math.random() * selection.length)
       const result = selection[roll]
 
       if (!this.hideroll) this.display(result, `${roll + 1}`)
       else this.display(result)
-    } else if (this.mode == TableMode.TwoColumn) {
+    } else if (this.mode === TableMode.TwoColumn) {
       const ranges = this.ranges(0)
       const selection = this.selection(1)
 
@@ -105,6 +114,22 @@ export class VellumRandomTable extends LitElement {
           this.display(result)
         }
       }
+    } else if (this.mode === TableMode.MultiColumn) {
+      const ranges = this.ranges(0)
+      const result = this.resultColumns()
+        .map((column: HTMLElement[]) => {
+          const roll = this.die?.roll()
+          if (roll) {
+            const index = ranges.findIndex((range) =>
+              range.includes(roll.result),
+            )
+            return column[index]
+          } else return undefined
+        })
+        .map((element) => element?.innerText)
+        .join(' ')
+
+      this.displayAsString(result)
     }
   }
 
@@ -122,6 +147,22 @@ export class VellumRandomTable extends LitElement {
       Array.from(result.children).forEach((c) =>
         target.appendChild(c.cloneNode(true)),
       )
+
+      if (details) target.appendChild(document.createTextNode(` (${details})`))
+    }
+  }
+
+  private displayAsString(
+    result: string,
+    details: string | undefined = undefined,
+  ): void {
+    const target = this.resultTarget
+
+    if (target && target instanceof HTMLInputElement) {
+      target.value = `${result}${details ? ` (${details})` : ''}`
+    } else if (target) {
+      target.innerHTML = ''
+      target.appendChild(document.createTextNode('result'))
 
       if (details) target.appendChild(document.createTextNode(` (${details})`))
     }

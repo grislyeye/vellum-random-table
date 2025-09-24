@@ -99,6 +99,49 @@ Two-column table where items are selected by a d66:
 </vellum-random-table>
 ```
 
+Multi-column table which concatenates results:
+
+```html
+<vellum-random-table select="#result" hideroll>
+  <caption>
+    Spark Table
+  </caption>
+  <table>
+    <thead>
+      <tr>
+        <th>1d4</th>
+        <th>Spark 1</th>
+        <th>Spark 2</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Axe</td>
+        <td>Wood</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Sword</td>
+        <td>Tavern</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Dagger</td>
+        <td>Chest</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Bow</td>
+        <td>Castle</td>
+      </tr>
+    </tbody>
+  </table>
+  <button>Roll</button>
+  <input id="result" type="text" />
+</vellum-random-table>
+```
+
 ## Installation
 
 You have a few options (choose one of these):
