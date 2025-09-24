@@ -673,10 +673,12 @@
       if (this.preroll) this.roll();
     }
     get mode() {
-      if (this.table.rows[0].cells.length == 2) {
+      if (this.table.rows[0].cells.length > 2) {
+        return 2 /* MultiColumn */;
+      } else if (this.table.rows[0].cells.length == 2) {
         return 1 /* TwoColumn */;
       } else {
-        return 0 /* FirstColumn */;
+        return 0 /* OneColumn */;
       }
     }
     get button() {
@@ -696,6 +698,9 @@
     selection(column) {
       return Array.from(this.table.tBodies).flatMap((tbody) => Array.from(tbody.rows)).map((row) => row.cells[column]);
     }
+    resultColumns() {
+      return [...Array(this.table.rows[0].cells.length - 1).keys()].map((column) => column + 1).map((column) => this.selection(column));
+    }
     get resultTarget() {
       if (this.select) return this.querySelector(this.select);
       return;
@@ -703,13 +708,13 @@
     roll() {
       const target = this.resultTarget;
       if (!target) return;
-      if (this.mode == 0 /* FirstColumn */) {
+      if (this.mode === 0 /* OneColumn */) {
         const selection = this.selection(0);
         const roll = Math.floor(Math.random() * selection.length);
         const result = selection[roll];
         if (!this.hideroll) this.display(result, `${roll + 1}`);
         else this.display(result);
-      } else if (this.mode == 1 /* TwoColumn */) {
+      } else if (this.mode === 1 /* TwoColumn */) {
         const ranges = this.ranges(0);
         const selection = this.selection(1);
         const roll = this.die?.roll();
@@ -723,6 +728,18 @@
             this.display(result);
           }
         }
+      } else if (this.mode === 2 /* MultiColumn */) {
+        const ranges = this.ranges(0);
+        const result = this.resultColumns().map((column) => {
+          const roll = this.die?.roll();
+          if (roll) {
+            const index = ranges.findIndex(
+              (range) => range.includes(roll.result)
+            );
+            return column[index];
+          } else return void 0;
+        }).map((element) => element?.innerText).join(" ");
+        this.displayAsString(result);
       }
     }
     display(result, details = void 0) {
@@ -734,6 +751,16 @@
         Array.from(result.children).forEach(
           (c4) => target.appendChild(c4.cloneNode(true))
         );
+        if (details) target.appendChild(document.createTextNode(` (${details})`));
+      }
+    }
+    displayAsString(result, details = void 0) {
+      const target = this.resultTarget;
+      if (target && target instanceof HTMLInputElement) {
+        target.value = `${result}${details ? ` (${details})` : ""}`;
+      } else if (target) {
+        target.innerHTML = "";
+        target.appendChild(document.createTextNode("result"));
         if (details) target.appendChild(document.createTextNode(` (${details})`));
       }
     }
