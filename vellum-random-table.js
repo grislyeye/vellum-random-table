@@ -736,9 +736,11 @@
             const index = ranges.findIndex(
               (range) => range.includes(roll.result)
             );
-            return column[index];
-          } else return void 0;
-        }).map((element) => element?.innerText).join(" ");
+            return [column[index], roll];
+          }
+        }).map(
+          ([element, roll]) => this.hideroll ? element?.innerText : `${element?.innerText} (${roll.result})`
+        ).join(" ");
         this.displayAsString(result);
       }
     }
