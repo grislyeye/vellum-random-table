@@ -1,6 +1,6 @@
 import { LitElement, css, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
-import { Die } from './dice'
+import { Die, Roll } from './dice'
 import { Range, parseRange } from './range'
 
 enum TableMode {
@@ -123,10 +123,14 @@ export class VellumRandomTable extends LitElement {
             const index = ranges.findIndex((range) =>
               range.includes(roll.result),
             )
-            return column[index]
-          } else return undefined
+            return [column[index], roll]
+          }
         })
-        .map((element) => element?.innerText)
+        .map(([element, roll]: [HTMLElement, Roll]) =>
+          this.hideroll
+            ? element?.innerText
+            : `${element?.innerText} (${roll.result})`,
+        )
         .join(' ')
 
       this.displayAsString(result)
