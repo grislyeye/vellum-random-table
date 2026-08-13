@@ -141,5 +141,33 @@
       <button>Roll</button>
       <input id="result" type="text" />
     </vellum-random-table>
+    
+    <h2>Two-column random table</h2>
+
+    <vellum-random-table select="#result" preroll hideroll>
+      <caption>
+        Random Encounters
+      </caption>
+      <table>
+        <thead>
+          <tr>
+            <th>Encounter 1</th>
+            <th>Encounter 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1 wolf</td>
+            <td>2 geese</td>
+          </tr>
+          <tr>
+            <td>2 goblins</td>
+            <td>1 rabbit</td>
+          </tr>
+        </tbody>
+      </table>
+      <button>Roll</button>
+      <input id="result" type="text" />
+    </vellum-random-table>
   </body>
 </html>
