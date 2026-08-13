@@ -18,6 +18,7 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "sourceMap": true,
+    "rootDir": "./",
     "outDir": "./",
     "types": ["node"],
     "lib": ["ES6", "DOM"],
