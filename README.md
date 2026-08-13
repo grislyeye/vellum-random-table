@@ -157,7 +157,7 @@ Include the `<script>` in your markup:
 ```html
 <script
   type="module"
-  src="https://www.unpkg.com/vellum-random-table@1.1.0/vellum-random-table.js"
+  src="https://www.unpkg.com/vellum-random-table@1.2.1/vellum-random-table.js"
 ></script>
 ```
 
